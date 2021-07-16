@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="张小五">
+
+
+
+
+
+<title>[03142互联网及其应用]笔记-第7章 计算机网络安全及管理技术 | 大脑指挥手</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">大脑指挥手</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">大脑指挥手</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">[03142互联网及其应用]笔记-第7章 计算机网络安全及管理技术</h1>
+            
+                <div class="post-meta">
+                    
+                        <a itemprop="author" rel="author" href="/">张小五</a>
+                    
+
+                    
+                        <span class="post-time">
+                         作于 <a href="#">2021年03月04日</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h3 id="计算机网络安全"><a href="#计算机网络安全" class="headerlink" title="计算机网络安全"></a>计算机网络安全</h3><p><strong>计算机网络安全</strong>是指通过采取各种技术和管理措施，确保网络数据的可用性、完整性和保密性，其目的是确保经过网络传输和交换的数据不会发生增加、修改、丢失和泄露等。</p>
+<p><strong>计算机安全</strong>的主要内容有计算机硬件的安全性、软件安全性、数据安全性、计算机运行安全性。</p>
+<p><strong>网络安全</strong>是指信息的保密性、完整性、可靠性、实用性、真实性、占有性。<br>造成网络安全问题日益突出的主要原因有：网络的共享性、系统的复杂性、边界不确定性、路径不确定性。</p>
+<p><strong>网络安全措施</strong>主要有：物理安全、访问控制、传输安全、防火墙。</p>
+<ul>
+<li><strong>物理安全</strong>可以分两个方面，一是人为对网络的损害，可以通过采取立标牌标明电缆位置、采用结构化布线、做好防虫、防盗、防水等解决；二是网络对使用者的危害，可以通过做好网络的绝缘、接地和屏蔽工作解决。</li>
+<li><strong>访问控制</strong>可以通过使用密码，设置网络资源的属主、属性和访问权限，加强网络安全监视，做好审计和跟踪。</li>
+<li><strong>传输安全</strong>可以通过采用加密与数字签名、SSL协议、电子邮件安全和防火墙来保障。</li>
+</ul>
+<p>网络上的加密可以分为3层：第一层为数据链路层加密；第二层是传输层的加密；第三层是应用层上的加密。<br>数字签名是数据的接收者用来证实数据的发送者确实无误的一种方法，主要通过加密算法和证实协议实现。<br>SSL协议的目标是提供两个应用软件之间通信的保密性和可靠性。<br>电子邮件安全技术有PGP和S/MIME两种端到端的安全技术，它们主要功能就是身份的认证和传输数据的加密。<br>PGP是基于RSA加密技术的邮件加密系统，主要用于防止非授权者对邮件的阅读与修改，同时还能为邮件提供数字签名以保证邮件的真实性。<br>S/MIME是从PEM和MIME发展而来，是一种利用单向散列算法和公钥与私钥的加密体系。</p>
+<p><strong>PKI技术</strong>就是利用公钥理论和技术建立的提供信息安全服务的基础设施，是CA认证、数字证书、数字签名以及相关安全应用组件模块的集合。<br>PKI的核心是要解决网络空间中的信任问题，确定信息网络空间中各种主体身份的唯一性、真实性和合法性，保护信息网络空间中各种主体的安全利益。<br>一个标准的PKI域必须具备以下内容：</p>
+<ul>
+<li>认证机构(CA)。</li>
+<li>证书和证书库。</li>
+<li>密钥备份及恢复。</li>
+<li>密钥和证书的更新。</li>
+<li>证书历史档案。</li>
+<li>客户端软件。</li>
+<li>交叉认证。</li>
+</ul>
+<h3 id="网络攻击与网络病毒"><a href="#网络攻击与网络病毒" class="headerlink" title="网络攻击与网络病毒"></a>网络攻击与网络病毒</h3><p><strong>黑客</strong>原本是指程序员，他们通常具有硬件和软件的高级知识，并有能力通过创新的方法剖析系统，检查系统完整性和安全性。<br><strong>入侵者</strong>是指怀着不良的企图，闯入甚至破坏远程计算机系统完整性的人。<br>两者的不同之处在于：一方面是两者的动机不同；另一方面是在于入侵者并不像黑客一样都是在计算机知识方面有着很深造诣的人。</p>
+<p><strong>网络攻击技术</strong>有获取密码、电子邮件攻击、特洛伊木马攻击、诱人法、系统漏洞扫描、网络监听、缓冲区溢出、拒绝服务攻击。</p>
+<p><strong>网络病毒</strong>的特征有传播速度更快、危害性更强、融入了黑客特征，网络病毒的主要解决办法只能从采用先进的防病毒技术与制定严格的用户使用网络的管理制度两方面入手。</p>
+<p>**拒绝服务攻击(DoS)**是指占据了大量的系统资源，没有剩余的资源给其他用户，系统不能为其他用户提供正常的服务。</p>
+<h3 id="防火墙"><a href="#防火墙" class="headerlink" title="防火墙"></a>防火墙</h3><p><strong>防火墙</strong>是一种访问控制技术，它用于加强两个或多个网络间的边界防卫能力。它在公共网络和专用网络之间设立一道隔离墙，在此检查是否允许进出专用网络的信息通过，或是否允许用户的服务请求，从而阻止对信息资源的非法访问和非授权用户的进入，是一种被动防卫技术。</p>
+<p><strong>设置防火墙的原因</strong>：因为传统的子网系统往往把自己完全暴露在一些本身并不安全的服务下，暴露在外界主机的侦探和攻击下。这样，子网的安全就要完全依靠于各个主机，并且要求各个主机有相同的安全度。子网越大，越难以保证各主机都有较高的安全度。况且，很多“入侵”是由配置或密码错误造成的，而不是故意的、复杂的攻击。而防火墙能提高系统整体的安全性，给站点带来无尽的好处。</p>
+<p><strong>防火墙技术分类</strong>：网络层防火墙和应用层防火墙。</p>
+<ul>
+<li><strong>网络层防火墙</strong>通常是以路由器为基础，采用“数据包过滤”技术。</li>
+<li><strong>应用层防火墙</strong>也称为代理服务器，它是基于软件，控制对应用程序的访问。当远程用户想和一个运行应用网关的网络建立联系时，应用网关会阻塞这个远程连接，然后对连接请求的各个域进行检查。如果此连接请求符合预定的规则，网关便会在远程主机和内部主机之间建立一个“桥”，自己在中间充当转换器和解释器，然后转发报文。</li>
+</ul>
+<h3 id="安全接入技术"><a href="#安全接入技术" class="headerlink" title="安全接入技术"></a>安全接入技术</h3><p><strong>远程访问控制</strong>的安全包含3个方面的内容：认证、授权和记账。<br>远程访问控制协议有：RADIUS和TACACS+。<br>二者的相似点：<br>结构上都采用了C/S、请求/响应模式；都使用公共密钥对网上传输的用户信息进行加密；都提供了进一步认证的手段；都有较好的灵活性和可扩充性。<br>二者的区别：<br>首先，客户端与服务器端连接所采用的传输协议不同。RADIUS采用UDP；TACACS+采用了TCP。<br>其次，对报文的加密程度不同。RADIUS进队用户的密码部分加密；TACACS+对整个报文进行加密。<br>再次，对AAA功能的分离程度不同。RADIUS定义的数据报文比较简单，无法分离认证和授权；而TACACS+的数据报文比较复杂，实现了认证、授权和记账功能的分离。<br>最后，在支持代理方式上不同。RADIUS协议中定义了服务器端充当代理服务器客户端的功能；但TACACS+协议中没有具体提到。</p>
+<p><strong>802.1X</strong>系统共有3个实体：客户端、认证系统、认证服务器。</p>
+<h3 id="网络系统可靠性"><a href="#网络系统可靠性" class="headerlink" title="网络系统可靠性"></a>网络系统可靠性</h3><p>网络系统可靠性主要是指系统的容错能力，即当网络系统突然发生故障时，系统能够继续工作及迅速恢复的能力。<br>网络系统的容错和可靠性设计有软件容错、硬件容错、容错存储、数据备份、容错电源。</p>
+<h3 id="网络管理"><a href="#网络管理" class="headerlink" title="网络管理"></a>网络管理</h3><p>按照OSI管理框架，网络管理任务分为：用户管理、配置管理、性能管理、故障管理、计费管理、安全管理和其他网络管理功能。</p>
+<ul>
+<li>用户管理是网络管理的基本功能，用于管理用户标识、用户账户、用户密码、文件目录、地址和用户个人信息以及工作站信息等。</li>
+<li>网络配置功能至少包括：识别被管网络的拓扑结构、监视网络设备的运行状态和参数、自动修改指定设备的配置和动态维护网络等。</li>
+<li>网络性能主要包括网络吞吐量、响应时间、线路利用率、网络可用性等参数。网络性能管理是指通过监控网络的运行状态调整网络性能参数来改善网络的性能，确保网络的平稳运行。</li>
+<li>故障管理包括故障检测、故障诊断和故障恢复。</li>
+<li>计费管理主要包括：统计用户使用网络资源的情况、根据资费标准计算出使用费用、统计网络资源和信息资源的使用情况、分析预测网络业务量。</li>
+<li>网络安全管理的目标是防止用户网络资源的非法访问，确保网络资源和网络用户的安全。</li>
+<li>其他网络管理还有：用户培训、设备维护、网络规划、网络资产管理等。</li>
+</ul>
+<p>网络管理的层次结构，依次是网络平台、网络管理协议、网络管理平台、网络管理工具、网络管理应用软件和网络管理员操作界面。</p>
+<p>网络管理的技术有两种：</p>
+<ul>
+<li>基于TCP/IP网络的简单网络管理协议(SNMP)。</li>
+<li>由国际标准化组织(ISO)开发的公共管理信息服务/公共管理信息协议(CMIS/CMIP)。</li>
+</ul>
+<p>**简单网络管理协议(SNMP)**是在应用层上进行网络设备的管理，可以进行网络状态监视、网络参数设定、网络流量的统计与分析、发现网络故障等。<br>SNMP</p>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E4%BA%92%E8%81%94%E7%BD%91%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8/"># 互联网及其应用</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/03/05/zk-04751-notes1/">[04751计算机网络安全]笔记-第1章 绪论</a>
+            
+            
+            <a class="next" rel="next" href="/2021/03/03/zk-03142-notes6/">[03142互联网及其应用]笔记-第6章 常用服务器的安装与配置</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© 张小五 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

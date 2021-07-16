@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="张小五">
+
+
+
+
+
+<title>MySQL Group Replication(MGR)部署 | 大脑指挥手</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">大脑指挥手</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">大脑指挥手</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">MySQL Group Replication(MGR)部署</h1>
+            
+                <div class="post-meta">
+                    
+                        <a itemprop="author" rel="author" href="/">张小五</a>
+                    
+
+                    
+                        <span class="post-time">
+                         作于 <a href="#">2020年11月19日</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>MySQL MGR提供了一个高可用性、高弹性、可靠的 MySQL 服务。</p>
+<p>部署环境： ubuntu 18.04 * 3台 + mysql 5.7.32 + VMware + NAT网络</p>
+<h2 id="MySQL基础服务部署"><a href="#MySQL基础服务部署" class="headerlink" title="MySQL基础服务部署"></a>MySQL基础服务部署</h2><p>在配置MySQL MGR之前，需要先在服务器上部署好“单机版”MySQL服务。</p>
+<p>MySQL部署快速命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">shell&gt; apt install libaio1</span><br><span class="line">shell&gt; groupadd mysql</span><br><span class="line">shell&gt; useradd -r -g mysql -s /bin/<span class="literal">false</span> mysql</span><br><span class="line">shell&gt; <span class="built_in">cd</span> /usr/<span class="built_in">local</span></span><br><span class="line">shell&gt; tar zxvf mysql-5.7.32-linux-glibc2.12-x86_64.tar.gz</span><br><span class="line">shell&gt; mv mysql-5.7.32-linux-glibc2.12-x86_64 mysql</span><br><span class="line">shell&gt; <span class="built_in">cd</span> mysql</span><br><span class="line">shell&gt; mkdir mysql-files</span><br><span class="line">shell&gt; chmod 750 mysql-files</span><br><span class="line">shell&gt; <span class="built_in">cd</span> ..  <span class="comment"># /usr/local</span></span><br><span class="line">shell&gt; chown -R mysql:mysql mysql</span><br><span class="line">shell&gt; bin/mysqld --initialize --user=mysql  <span class="comment"># 此处输出日志有root初始密码</span></span><br><span class="line">shell&gt; bin/mysql_ssl_rsa_setup</span><br><span class="line">shell&gt; bin/mysqld_safe --user=mysql &amp;</span><br></pre></td></tr></table></figure>
+<p>密码修改：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span>  <span class="keyword">set</span> password<span class="operator">=</span>password(<span class="string">&#x27;yourpassword&#x27;</span>);</span><br><span class="line">mysql<span class="operator">&gt;</span>  flush privileges;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="MySQL-MGR配置"><a href="#MySQL-MGR配置" class="headerlink" title="MySQL MGR配置"></a>MySQL MGR配置</h2><h3 id="1-配置my-cnf和hosts"><a href="#1-配置my-cnf和hosts" class="headerlink" title="1.配置my.cnf和hosts"></a>1.配置my.cnf和hosts</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">shell&gt; cat /etc/my.cnf</span><br><span class="line">[mysqld]</span><br><span class="line">character-set-server=utf8mb4</span><br><span class="line">lower_case_table_names=1</span><br><span class="line"><span class="comment"># MGR settings</span></span><br><span class="line">disabled_storage_engines=<span class="string">&quot;MyISAM,BLACKHOLE,FEDERATED,ARCHIVE,MEMORY&quot;</span></span><br><span class="line">server_id=1</span><br><span class="line">gtid_mode=ON</span><br><span class="line">enforce_gtid_consistency=ON</span><br><span class="line">master_info_repository=TABLE</span><br><span class="line">relay_log_info_repository=TABLE</span><br><span class="line">binlog_checksum=NONE</span><br><span class="line">log_slave_updates=ON</span><br><span class="line">log_bin=binlog</span><br><span class="line">binlog_format=ROW</span><br><span class="line">plugin_load_add=<span class="string">&#x27;group_replication.so&#x27;</span></span><br><span class="line">transaction_write_set_extraction=XXHASH64</span><br><span class="line">group_replication_group_name=<span class="string">&quot;aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa&quot;</span></span><br><span class="line">group_replication_start_on_boot=off</span><br><span class="line">group_replication_local_address= <span class="string">&quot;master:33061&quot;</span></span><br><span class="line">group_replication_group_seeds= <span class="string">&quot;master:33061,slave1:33061,slave2:33061&quot;</span></span><br><span class="line">group_replication_bootstrap_group=off</span><br><span class="line"></span><br><span class="line">shell&gt; cat /etc/hosts</span><br><span class="line">127.0.0.1 localhost</span><br><span class="line">192.168.61.128 master</span><br><span class="line">192.168.61.129 slave1</span><br><span class="line">192.168.61.130 slave2</span><br></pre></td></tr></table></figure>
+<p>修改完成后，重启服务器。</p>
+<h3 id="2-启动MGR服务"><a href="#2-启动MGR服务" class="headerlink" title="2.启动MGR服务"></a>2.启动MGR服务</h3><p>先启动master服务：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- master</span></span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">set</span> <span class="keyword">global</span> group_replication_bootstrap_group<span class="operator">=</span><span class="keyword">ON</span>;</span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">start</span> group_replication;</span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">set</span> <span class="keyword">global</span> group_replication_bootstrap_group<span class="operator">=</span>OFF;</span><br></pre></td></tr></table></figure>
+<p>再启用slave服务：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- slave</span></span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">start</span> group_replication;</span><br></pre></td></tr></table></figure>
+<p>查看服务状态：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> performance_schema.replication_group_members;</span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------------+--------------------------------------+-------------+-------------+--------------+</span></span><br><span class="line"><span class="operator">|</span> CHANNEL_NAME              <span class="operator">|</span> MEMBER_ID                            <span class="operator">|</span> MEMBER_HOST <span class="operator">|</span> MEMBER_PORT <span class="operator">|</span> MEMBER_STATE <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------------+--------------------------------------+-------------+-------------+--------------+</span></span><br><span class="line"><span class="operator">|</span> group_replication_applier <span class="operator">|</span> <span class="number">035</span>d4863<span class="number">-1</span>a5b<span class="number">-11</span>eb<span class="operator">-</span>b2f8<span class="number">-000</span>c299b693b <span class="operator">|</span> master      <span class="operator">|</span>        <span class="number">3306</span> <span class="operator">|</span> ONLINE       <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> group_replication_applier <span class="operator">|</span> <span class="number">612612e0</span><span class="number">-1</span>a59<span class="number">-11</span>eb<span class="number">-9</span>ab6<span class="number">-000</span>c29912f8c <span class="operator">|</span> slave1      <span class="operator">|</span>        <span class="number">3306</span> <span class="operator">|</span> ONLINE       <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> group_replication_applier <span class="operator">|</span> e781b3c8<span class="number">-1</span>a57<span class="number">-11</span>eb<span class="number">-8908</span><span class="number">-000</span>c29396c65 <span class="operator">|</span> slave2      <span class="operator">|</span>        <span class="number">3306</span> <span class="operator">|</span> ONLINE       <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------------+--------------------------------------+-------------+-------------+--------------+</span></span><br><span class="line"><span class="number">3</span> <span class="keyword">rows</span> <span class="keyword">in</span> <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure>
+<p>只有’MEMBER_STATE’全部为’ONLINE’，才说明启动正常，其它均为异常。<br>异常时可以去查看mysql的错误日志，默认是在/usr/local/mysql/data/hosts.err.</p>
+<p>至此，MGR服务就已经搭建完成了！</p>
+<p>Ps:</p>
+<ol>
+<li>配置了/etc/hosts需要重启服务器以使host生效，否则启动mgr时会无法解析地址。</li>
+<li>如果以其它配置启动过mgr服务，可能会导致mgr无法启动问题，系统提示“ERROR 3092 (HY000): The server is not configured properly to be an active member of the group. Please see more details on error log.”，此时在mysql命令行执行下“reset master”命令即可解决。</li>
+</ol>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/mysql/"># mysql</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/01/07/mysql-innodb-tx/">MySQL的事务隔离级别（Innodb）</a>
+            
+            
+            <a class="next" rel="next" href="/2020/09/27/python-pymysql/">Win平台下Django 2.2 安装pymysql</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© 张小五 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

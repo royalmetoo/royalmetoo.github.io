@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="张小五">
+
+
+
+
+
+<title>[04751计算机网络安全]笔记-第6章 网络安全检测技术 | 大脑指挥手</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">大脑指挥手</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">大脑指挥手</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">[04751计算机网络安全]笔记-第6章 网络安全检测技术</h1>
+            
+                <div class="post-meta">
+                    
+                        <a itemprop="author" rel="author" href="/">张小五</a>
+                    
+
+                    
+                        <span class="post-time">
+                         作于 <a href="#">2021年03月08日</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h3 id="网络安全漏洞"><a href="#网络安全漏洞" class="headerlink" title="网络安全漏洞"></a>网络安全漏洞</h3><p><strong>安全威胁</strong>是指所有能够对计算机网络信息系统的网络服务和网络信息的机密性、可用性和完整性产生阻碍、破坏或中断的各种因素。<br>安全威胁可以分为认为安全威胁和非认为安全威胁。</p>
+<p><strong>漏洞分析的目的</strong>是发现目标系统中存在的安全隐患，分析所使用的安全机制是否能够保证系统的机密性、完整性和可用性。<br>漏洞分析通过对评估目标进行穿透测试，进而尝试从中获取一些有价值的东西，如文本文件、口令文件和机密文件等。<br>穿透测试可以分为两类：无先验知识穿透测试和有先验知识穿透测试。<br>无先验知识穿透测试通常从外部实施，测试者对被测试网络系统的拓扑结构等信息一无所知。<br>有先验知识穿透测试通常具有被测试网络系统的基本访问权限，并可以了解网络系统拓扑结构等信息。</p>
+<p><strong>漏洞</strong>是在硬件、软件和协议的具体实现或系统安全策略上存在的缺陷，从而可以使攻击者能够在未授权的情况下访问或破坏系统。<br><strong>漏洞的分类方法</strong>主要有按漏洞可能对系统造成的直接威胁分类和按漏洞的成因分类。<br><strong>按漏洞可能对系统造成的直接威胁分类</strong>的漏洞类型有：远程管理员权限、本地管理员权限、普通用户访问权限、权限提升、读取受限文件、远程拒绝服务、本地拒绝服务、远程非授权文件存取、口令恢复、欺骗、服务器信息泄露、其他漏洞。<br><strong>按漏洞的成因分类</strong>的漏洞类型有：输入验证错误、访问验证错误、竞争条件、意外情况处置错误、设计错误、配置错误、环境错误。</p>
+<h3 id="漏洞检测技术"><a href="#漏洞检测技术" class="headerlink" title="漏洞检测技术"></a>漏洞检测技术</h3><p>网络安全漏洞检测主要包括<strong>端口扫描</strong>、<strong>操作系统探测</strong>和<strong>安全漏洞探测</strong>。<br>通过端口扫描可以掌握系统都开放了哪些端口、提供了哪些网络服务。<br>通过操作系统探测可以掌握操作系统的类型信息。<br>通过安全漏洞探测可以发现系统中可能存在的安全漏洞。</p>
+<p><strong>端口扫描</strong>的原理是向目标主机的TCP/IP端口发送探测数据包，并记录目标主机的响应，通过分析响应来判断端口是打开还是关闭等状态信息。端口扫描技术分为TCP端口扫描技术和UDP端口扫描技术。<br><strong>TCP端口扫描技术</strong>主要有全连接扫描技术、半连接(SYN)扫描技术、间接扫描技术和秘密扫描技术等。其中<strong>TCP全连接扫描技术</strong>主要是TCP connect()扫描，通过对目标主机上感兴趣的端口进行connect()连接试探，如果该端口被监听，则连接成功，否则表示该端口未开放或无法到达；<strong>半连接(SYN)端口扫描</strong>不建立完整的TCP连接，而是只发送一个SYN信息包，一个SYN|ACK(应答)的响应包表示目标端口是开放监听的，而一个RST(复位)的响应包则表示目标端口未被监听。<br><strong>UDP端口扫描技术</strong>主要是用来确定目标主机上有哪些UDP端口是开发的。其实现思想是：发送0字节的UDP信息包到目标计算机的各个端口，若收到一个ICMP端口不可达的回应，则表示该UDP端口是关闭的，否则该端口就是开放的。</p>
+<p><strong>操作系统探测技术</strong>主要包括获取标识信息探测技术、基于TCP/IP协议栈的操作系统指纹探测技术和ICMP响应分析探测技术。<br><strong>获取标识信息探测技术</strong>主要是指借助操作系统本身提供的命令或程序进行操作系统类型探测的技术。通常可以利用telnet命令。<br><strong>基于TCP/IP协议栈的操作系统指纹探测技术</strong>是指能够通过网络连接获取的唯一标识某一操作系统的类型及其版本号的一组特征信息。典型的应用有NMAP。<br><strong>ICMP响应分析探测技术</strong>是通过发送UDP或ICMP的请求报文，然后分析各种ICMP应答信息来判断操作系统的类型及其版本信息。</p>
+<p>操作系统指纹探测步骤：</p>
+<ol>
+<li>形成一个涵盖大部分常用操作系统的较为详细全面的操作系统指纹特征库。</li>
+<li>向目标发送多种特意构造的信息包，检测其是否响应这些信息包，以及是如何响应这些信息包的。</li>
+<li>把从特定目标返回的特征信息与指纹特征库进行匹配，从而判断出目标计算机的操作系统类型及其版本号信息。</li>
+</ol>
+<p><strong>安全漏洞探测技术</strong>是采用各种方法对目标可能存在的已知安全漏洞进行逐项检查。<br>按网络安全漏洞的<strong>可利用方式</strong>来划分，可分为信息型漏洞探测和攻击型漏洞探测。<br>信息型漏洞探测：大部分的网络安全漏洞都与特定的目标状态，比如设备型号、操作系统版本及补丁情况、配置情况、运行服务及服务程序版本等直接相关，因此只要对目标的此类信息进行准确探测就可以在很大程度上确定目标存在的安全漏洞。补充技术有：顺序扫描技术、多重服务检测技术。<br>攻击型漏洞探测：主要思想是模拟网络入侵的一般过程，对目标系统进行无恶意攻击尝试，若攻击成功则表明显影安全漏洞必然存在。模拟攻击主要通过专用攻击脚本语言、通用程序设计语言和成形的攻击工具来进行。</p>
+<p>按漏洞<strong>探测的技术特征</strong>来划分，可分为基于应用的探测技术、基于主机的探测技术、基于目标的探测技术和基于网络的探测技术。</p>
+<h3 id="网络安全检测评估系统"><a href="#网络安全检测评估系统" class="headerlink" title="网络安全检测评估系统"></a>网络安全检测评估系统</h3><p>Internet Scanner是ISS公司开发的网络安全评估工具，可以对网络漏洞进行提供决策支持。<br>Nessus是开源的网络安全检测工具，其主要特色是C/S架构；采用plug-in技术；调用外部程序增强测试能力。</p>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"># 计算机网络安全</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/03/08/zk-04751-notes7/">[04751计算机网络安全]笔记-第7章 计算机病毒与恶意代码防范技术</a>
+            
+            
+            <a class="next" rel="next" href="/2021/03/08/zk-04751-notes5/">[04751计算机网络安全]笔记-第5章 入侵检测技术</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© 张小五 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

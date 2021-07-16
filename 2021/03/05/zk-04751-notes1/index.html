@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="张小五">
+
+
+
+
+
+<title>[04751计算机网络安全]笔记-第1章 绪论 | 大脑指挥手</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">大脑指挥手</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">大脑指挥手</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">[04751计算机网络安全]笔记-第1章 绪论</h1>
+            
+                <div class="post-meta">
+                    
+                        <a itemprop="author" rel="author" href="/">张小五</a>
+                    
+
+                    
+                        <span class="post-time">
+                         作于 <a href="#">2021年03月05日</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h3 id="计算机网络系统面临的威胁"><a href="#计算机网络系统面临的威胁" class="headerlink" title="计算机网络系统面临的威胁"></a>计算机网络系统面临的威胁</h3><p>计算机网络系统面临的威胁有计算机网络实体面临威胁、计算机网络系统面临威胁、恶意程序的威胁、计算机网络威胁的潜在对手和动机。<br>计算机网络系统的安全威胁主要表现在主机可能会受到非法入侵者的攻击，网络中的敏感数据有可能泄露或被修改，从内部网向公共网传递的信息可能被他人窃听或篡改等。<br>典型的网络安全威胁有：窃听、重传、伪造、篡改、非授权访问、拒绝服务攻击、行为否认、旁路控制、电磁/射频截获、人员疏忽。</p>
+<h3 id="计算机网络不安全的因素"><a href="#计算机网络不安全的因素" class="headerlink" title="计算机网络不安全的因素"></a>计算机网络不安全的因素</h3><p>计算机网络不安全的因素有：偶发因素、自然灾害、人为因素。</p>
+<p>人对计算机网络的攻击有被动攻击、主动攻击、邻近攻击、内部人员攻击、分发攻击。</p>
+<ul>
+<li><strong>被动攻击</strong>有：监视明文、解密通信数据、口令嗅探、通信量分析。抵抗被动攻击对策有：使用虚拟专用VPN、加密被保护网络、使用加保护的分布式网络。</li>
+<li><strong>主动攻击</strong>有：修改传输中的数据、重放、会话拦截、伪装成授权的用户或服务器、利用系统软件的漏洞、利用主机或网络的信任、利用恶意代码、利用协议或基础设施的系统缺陷、拒绝服务。抵抗主动攻击的对策有：增强内部网络的保护、采用基于身份认证的访问控制、远程访问保护、质量安全管理、自动病毒检测、审计和入侵检测等技术。</li>
+<li><strong>邻近攻击</strong>有：修改数据或收集信息、系统干涉、物理破坏。</li>
+<li><strong>内部人员攻击</strong>有：修改数据或安全机制、擅自连接网络、隐通道、物理损害或破坏。抵抗内部人员攻击的对策有：加强安全意识和技术培训、对系统的关键数据和服务采取特殊的访问控制机制、采用审计和入侵检测等技术。</li>
+<li><strong>分发攻击</strong>有：在设备生产时修改软硬件、在产品分发时修改软硬件。抵抗分发攻击的对策有：通过受控分发、由最终用户校验软件签名、访问控制。</li>
+</ul>
+<p>计算机网络不安全的原因有：互联网具有不安全性、操作系统存在安全问题、数据的安全问题、传输线路安全问题、网络安全管理问题。</p>
+<ul>
+<li>互联网的不安全性有：开放性的网络、国际性的网络、自由性的网络。</li>
+<li>操作系统的存在的安全问题有：操作系统体系结构造成的不安全隐患；操作系统可以创建进程，支持进程的远程创建与激活，支持被创建的进程继承创建进程的权利。</li>
+<li>数据的安全问题就是确保数据的安全性、完整性和并发控制。数据的安全性就是防止数据库被故意破坏和非法存取；数据的完整性是防止数据库中存在不符合语义的数据，以防止由于错误信息的输入、输出造成的无效操作和错误结果；数据的并发控制就是在多个用户程序并行地存取数据库时，保证数据库的一致性。</li>
+<li>网络的安全管理问题有：缺少安全管理人员、缺少安全管理的技术规范、缺少定期的安全测试与检查、缺少安全监控。</li>
+</ul>
+<h3 id="计算机网络安全的概念"><a href="#计算机网络安全的概念" class="headerlink" title="计算机网络安全的概念"></a>计算机网络安全的概念</h3><p><strong>计算机网络安全</strong>是指利用管理控制和技术措施，保证在一个网络环境里，信息数据的机密性、完整性及可使用性受到保护。<br>网路的安全问题有两方面：网络的系统安全、网络的信息安全。</p>
+<p><strong>计算机网络安全的目标</strong>是要确保信息系统的保密性、完整性、可用性、不可否认性、可控性。<br>保密性的要素有：数据保护、数据隔离和通信流保护。<br>访问控制、完整性和保密性成为协助支持可用性安全服务的机制。<br>不可否认性服务主要由应用层提供。</p>
+<p>根据网络安全措施作用位置的不同，可以将网络安全划分为四个层次：物理安全、逻辑安全、操作系统安全和联网安全。</p>
+<ul>
+<li><strong>物理安全</strong>主要包括防盗、防火、防静电、防雷击、防电磁泄漏和物理隔离等方面。</li>
+<li><strong>逻辑安全</strong>主要通过口令免密、权限控制等方法来实现。</li>
+<li><strong>操作系统安全</strong>主要包括用户权限控制和安全漏洞修复。</li>
+<li><strong>联网安全</strong>主要措施有：访问控制和通信安全。</li>
+</ul>
+<p>网络安全包括三个重要部分：先进的技术、严格的管理和威严的法律。</p>
+<h3 id="OSI安全体系结构"><a href="#OSI安全体系结构" class="headerlink" title="OSI安全体系结构"></a>OSI安全体系结构</h3><p>信息安全传输包含两方面的内容：一是对发送的信息进行安全转换；二是收、发方共享的某些秘密信息，除了对可信任的第三方外，对其他用户是保密的。<br>OSI安全体系结构不是能实现的标准，而是关于如何设计标准的标准。<br>OSI安全体系结构定义的<strong>五大安全服务</strong>有：鉴别服务、访问控制服务、数据机密性服务、数据完整性服务和抗抵赖性服务。<br>OSI安全体系结构定义的<strong>八大安全机制</strong>有加密机制、数字签名机制、访问控制机制、数据完整性机制、鉴别交换机制、通信业务流填充机制、路由控制和公证机制。</p>
+<h3 id="PPDR模型"><a href="#PPDR模型" class="headerlink" title="PPDR模型"></a>PPDR模型</h3><p>PPDR模型是一种常用的网络安全模型，主要包含四个部分：安全策略、防护、检测、响应。<br>PPDR模型有一套完整的理论体系，以数学模型作为其论述基础-基于时间的安全理论。该理论的基本思想是认为与信息安全有关的所有活动，包括攻击行为、防护行为、检测行为和响应行为等都要消耗时间，可以用时间来衡量一个体系的安全性和安全能力。<br>PPDR的一个明显弱点是忽略了内在的变化因素。</p>
+<h3 id="网络安全技术"><a href="#网络安全技术" class="headerlink" title="网络安全技术"></a>网络安全技术</h3><p>网络安全的典型技术有：物理安全措施、数据传输安全技术、内外网隔离技术、入侵检测技术、访问控制技术、审计技术、安全性检测技术、防病毒技术、备份技术、终端安全技术。</p>
+<ul>
+<li>物理安全是保护计算机网络设备、设施及其他媒体免遭地震、水灾或火灾等环境因素、认为操作失误及各种计算机犯罪行为导致的破坏过程。它包括三个方面：环境安全、设备安全和媒体安全。</li>
+<li>数据传输加密技术就是对传输中的数据流进行加密，以防止通信线路上的窃听、泄露、篡改和破坏；防抵赖技术包括对数据源和目的地双方的证明，常用的方法是数字签名。</li>
+<li>入侵检测的目的就是提供实时的检测及采取相应的防护手段，以便对进出各级局域网的常见操作进行实时检查、监控、报警和阻断，从而防止针对网络的攻击与犯罪行为，阻止黑客的入侵。</li>
+<li>访问控制是维护计算机网络系统安全、保护计算机资源的重要手段，是保证网络安全最重要的核心策略之一。</li>
+<li>审计技术是记录用户使用计算机网络系统进行所有活动的过程，记录系统产生的各类事件。</li>
+<li>网络安全检测是对网络的安全性进行评估分析，通过实践性的方法扫描分析网络系统，检查系统存在的弱点和漏洞，提出补救措施和安全策略的建议，达到增强网络安全性的目的。</li>
+<li>网络反病毒技术包括预防病毒、检测病毒和消除病毒三种技术。</li>
+<li>终端安全技术有：基于口令或密码算法的身份验证；自主和强制存取控制；多级权限管理；存储设备安全管理；数据和程序代码加密存储；严格的审计跟踪。</li>
+</ul>
+<h3 id="网络安全管理"><a href="#网络安全管理" class="headerlink" title="网络安全管理"></a>网络安全管理</h3><p>一个是网络安全管理的法律法规，一个是网络安全评价标准。</p>
+<h3 id="网络安全威胁发展趋势"><a href="#网络安全威胁发展趋势" class="headerlink" title="网络安全威胁发展趋势"></a>网络安全威胁发展趋势</h3><p>今后恶意代码、网络安全威胁和攻击机制的发展将具有以下特点：</p>
+<ol>
+<li>与Internet更加紧密的结合，利用一切可以利用的方式进行传播。</li>
+<li>所有的病毒都具有混合型特征，集文件传染、蠕虫、木马和黑客程序的特点于一身，破坏性大大增加。</li>
+<li>其扩散极快，而更加注重欺骗性。</li>
+<li>利用系统漏洞将成为病毒有力的传播方式。</li>
+<li>无线网络技术的发展，使远程网络攻击的可能性加大。</li>
+<li>各种境外情报、谍报人员将越来越多地通过信息网络渠道收集情报和窃取资料。</li>
+<li>各种攻击技术的隐秘性增强，常规防范手段难以识别。</li>
+<li>分布式计算技术用于攻击的趋势增强，威胁高强度密码的安全性。</li>
+<li>一些政府部门的超级计算机资源将成为攻击者利用的跳板。</li>
+<li>网络管理安全问题日益突出。</li>
+</ol>
+<h3 id="网络安全技术发展趋势"><a href="#网络安全技术发展趋势" class="headerlink" title="网络安全技术发展趋势"></a>网络安全技术发展趋势</h3><p>网络安全技术的发展使多维的、全方位的，主要有以下几种：物理隔离，逻辑隔离，防御来自网络的攻击，防御网络上的病毒，身份认证，加密通信和虚拟专用网，入侵检测和主动防卫，网管、审计和取证。</p>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"># 计算机网络安全</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/03/05/zk-04751-notes2/">[04751计算机网络安全]笔记-第2章 物理安全</a>
+            
+            
+            <a class="next" rel="next" href="/2021/03/04/zk-03142-notes7/">[03142互联网及其应用]笔记-第7章 计算机网络安全及管理技术</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© 张小五 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

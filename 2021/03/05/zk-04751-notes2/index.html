@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="张小五">
+
+
+
+
+
+<title>[04751计算机网络安全]笔记-第2章 物理安全 | 大脑指挥手</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">大脑指挥手</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">大脑指挥手</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">[04751计算机网络安全]笔记-第2章 物理安全</h1>
+            
+                <div class="post-meta">
+                    
+                        <a itemprop="author" rel="author" href="/">张小五</a>
+                    
+
+                    
+                        <span class="post-time">
+                         作于 <a href="#">2021年03月05日</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h3 id="物理安全"><a href="#物理安全" class="headerlink" title="物理安全"></a>物理安全</h3><p>物理安全是整个计算机网络系统安全的前提。<br>物理安全是保护计算机网络设备、设施及其他媒体免遭地震、水灾和火灾等环境事故、人为操作失误或各种计算机犯罪行为导致的破坏过程。<br>物理安全主要考虑的问题是环境、场地和设备的安全，以及物理访问控制和应急处置计划等。<br>物理安全主要包括机房环境安全、通信线路安全、设备安全和电源安全。<br>物理安全的措施包括安全制度、数据备份、辐射防护、屏幕口令保护、隐藏销毁、状态监测、报警确认、应急恢复、加强机房管理、运行管理、安全组织和人事管理等手段。</p>
+<h3 id="机房安全"><a href="#机房安全" class="headerlink" title="机房安全"></a>机房安全</h3><p>机房安全管理技术有：安全保卫技术，温度、湿度等环境条件保持技术，用电安全技术，安全管理技术。<br><strong>机房的安全等级</strong>分为A类、B类和C类三个基本类别。</p>
+<ul>
+<li>A类： 对计算机机房的安全有严格的要求，有完善的计算机机房安全措施。</li>
+<li>B类： 对计算机机房的安全有较严格的要求，有较完善的计算机机房安全措施。</li>
+<li>C类： 对计算机机房的安全有基本的要求，有基本的计算机机房安全措施。</li>
+</ul>
+<p>机房安全的要求与措施主要有：机房的安全要求、机房的防盗要求、机房的三度要求、防静电措施、接地与防雷要求和机房的防火、防水措施。<br>如何减少无关人员进入机房的机会是计算机机房设计时首先要考虑的问题。<br>机房的三度是指温度、湿度、洁净度。其中机房温度每升高10℃，计算机的可靠性下降25%，所以机房温度一般应控制在18~22℃；机房相对湿度一般应控制在40%~60%；洁净度要求机房尘埃颗粒直径小于0.5μm，平均每升空气含尘量小于1万颗。<br>静电对电设备的损害具有如下特点：隐蔽性、潜在性、随机性、复杂性。<br>地线种类有：保护地、直流地、屏蔽地、静电地、雷击地。其中保护地接地电阻要求小于4Ω，直流地的接地电阻小于2Ω，屏蔽地的接地电阻小于4Ω，雷击地接地线与其他地线应保持10m以上距离。<br>接地系统有：各自独立的接地系统，交、直流分开的接地系统，共地接地系统，直流地、保护地共用地系统，建筑物内共地系统。<br>接地体有：地桩、水平栅网、金属接地板、建筑物基础钢筋。<br>为避免火灾、水灾，应采取如下具体措施：隔离、火灾报警系统、灭火设施。<br>灭火器材最好使用气体灭火器，推荐卤代烷1211或1301灭火器，也可使用Co2灭火器。一般每4㎡至少应配置一个灭火器。</p>
+<h3 id="通信线路安全"><a href="#通信线路安全" class="headerlink" title="通信线路安全"></a>通信线路安全</h3><p>通信线路的安全技术有电缆加压技术、光纤技术。</p>
+<h2 id="设备安全"><a href="#设备安全" class="headerlink" title="设备安全"></a>设备安全</h2><p>设备安全包括设备的维护与管理、设备的电磁兼容和电磁辐射防护，以及信息存储媒体的安全管理等内容。<br>硬件设备的使用管理有如下几点：</p>
+<ol>
+<li>根据硬件设备的具体配置情况，制定切实可行的硬件设备的操作使用规程，并严格按操作规程进行操作。</li>
+<li>建立设备使用情况日志，并严格登记使用过程的情况。</li>
+<li>建立硬件设备故障情况登记表，详细记录故障性质和修复情况。</li>
+<li>坚持对设备进行例行维护和包养，并指定专人负责。</li>
+</ol>
+<p>电磁干扰可通过电磁辐射和传导两条途径影响电子设备的工作。一条是电子设备辐射的电磁波通过电路耦合到另一台电子设备中引起干扰；另一条是通过连接的导线、电源线、信号线等耦合而引起相互之间的干扰。<br>Tempest技术(信息泄露防护技术)是一种抑制信息处理设备的噪声泄露技术，是一项综合性非常强的技术，包括泄露信息的分析、预测、接收、是被、复原、防护、测试和安全评估等技术，涉及多个学科领域。<br>电磁辐射的防护措施有两类：一类是对传导发射的防护，主要采取对电源线和信号线加装性能良好的滤波器，减少传输阻抗和导线间的交叉耦合；另一类是对辐射的防护，这类防护措施又可分为采用各种电磁屏蔽措施、干扰的防护措施。</p>
+<h3 id="电源系统安全"><a href="#电源系统安全" class="headerlink" title="电源系统安全"></a>电源系统安全</h3><p>电源是计算机网络系统的命脉，电源系统的稳定可靠是计算机网络系统正常运行的先决条件，电源系统电压的波动、浪涌电流和突然断电等意外情况的发生还可能引起计算机系统存储信息的丢失、存储设备的损坏等情况的发生，电源系统的安全是计算机网络系统物理安全的一个重要组成部分。<br>机房供电分为三类：</p>
+<ul>
+<li>一类供电：需建立不间断供电系统。</li>
+<li>二类供电：需建立带备用的供电系统。</li>
+<li>三类供电：按一般用户供电考虑。</li>
+</ul>
+<p>电源的应急设备主要包括备用发电机、大容量蓄电池和UPS。<br>电源对用电设备安全的潜在威胁有：脉动与噪声、电磁干扰。</p>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"># 计算机网络安全</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/03/05/zk-04751-notes3/">[04751计算机网络安全]笔记-第3章 信息加密与PKI</a>
+            
+            
+            <a class="next" rel="next" href="/2021/03/05/zk-04751-notes1/">[04751计算机网络安全]笔记-第1章 绪论</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© 张小五 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

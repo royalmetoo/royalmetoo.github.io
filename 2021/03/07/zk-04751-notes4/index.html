@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="张小五">
+
+
+
+
+
+<title>[04751计算机网络安全]笔记-第4章 防火墙技术 | 大脑指挥手</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">大脑指挥手</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">大脑指挥手</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">[04751计算机网络安全]笔记-第4章 防火墙技术</h1>
+            
+                <div class="post-meta">
+                    
+                        <a itemprop="author" rel="author" href="/">张小五</a>
+                    
+
+                    
+                        <span class="post-time">
+                         作于 <a href="#">2021年03月07日</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h3 id="防火墙"><a href="#防火墙" class="headerlink" title="防火墙"></a>防火墙</h3><p>防火墙是一种将内部网络和外部网络分开的方法，是提供信息安全服务、实现网络和信息系统安全的重要基础措施，主要用于限制被保护的内部网络与外部网络之间进行的信息存取及信息传递等操作。<br>防火墙具有五大功能：过滤进出网络的数据；管理进出网络的访问行为；封堵某些禁止的业务；记录通过防火墙的信息内容和活动；对网络攻击的检测和告警。<br>防火墙的局限性有：网络的安全性通常是以网络服务的开放性和灵活性为代价；防火墙只是整个网络安全防护体系的一部分，而且防火墙并非万无一失。</p>
+<h3 id="防火墙体系结构"><a href="#防火墙体系结构" class="headerlink" title="防火墙体系结构"></a>防火墙体系结构</h3><p>防火墙的体系结构有：双重宿主主机体系结构；屏蔽主机体系结构；屏蔽子网体系结构。</p>
+<p>双重宿主主机体系结构的特点是：防火墙内部的系统能与双重宿主主机通信，同时防火墙外部的系统能与双重宿主主机通信；但是防火墙内部系统与外部系统之间不能直接互相通信，他们之间的IP通信被完全阻止。</p>
+<p>防护性能最好的是屏蔽子网体系结构，因为如果侵袭者入侵屏蔽子网体系结构的防火墙，必须要通过两个路由器，即使侵袭者设法侵入堡垒主机，他也必须通过内部路由器。</p>
+<h3 id="防火墙技术"><a href="#防火墙技术" class="headerlink" title="防火墙技术"></a>防火墙技术</h3><p>防火墙主要可以分为网络层防火墙和应用层防火墙，其实现技术主要有包过滤技术、代理服务技术、状态检测技术和NAT技术等。</p>
+<h4 id="包过滤技术"><a href="#包过滤技术" class="headerlink" title="包过滤技术"></a>包过滤技术</h4><p><strong>包过滤防火墙</strong>工作在网络层，通常基于IP数据包的源地址、目的地址、源端口和目的端口进行过滤。它的优点是效率高，对用户透明；缺点是对大多数服务和协议不能提供安全保障，无法有效区分同一IP的不同用户，包过滤防火墙难以配置、监控和管理，不能提供足够的日志和报警。</p>
+<p>数据包过滤技术是在网络层对数据包进行选择，选择的依据是系统内设置的过滤逻辑，被称为<strong>ACL</strong>即访问控制列表(Access Control List)。</p>
+<p>包过滤防火墙通过防火墙检查模块首先验证这个数据包是否符合过滤规则，不管是否符合过滤规则，防火墙一般都要记录数据包的情况，不符合规则的包要进行报警或通知管理员。对于丢弃的数据包，防火墙可以给发送方一个消息，也可以不发，取决于包过滤策略。</p>
+<p>数据包过滤技术可以允许或不允许某些数据包在网络上传输，主要依据：数据包的源地址、数据包的目的地址、数据包的协议类型、TCP或UDP的源端口、TCP或UDP的目的端口、ICMP消息类型。<br>包过滤系统只能进行类似如下的操作：</p>
+<ul>
+<li>不让任何用户从外部网用Telnet登录。</li>
+<li>允许任何用户使用SMTP往内部网发电子邮件。</li>
+<li>只允许某台计算机通过NNTP往内部网发新闻。</li>
+</ul>
+<p>数据包过滤防火墙的缺点是：一是非法访问一旦突破防火墙，即可对主机上的软件和配置漏洞进行攻击；二是数据包的源地址、目的地址及IP的端口号都在数据包的头部，很有可能被窃听或假冒。<br>包过滤技术的缺陷有：不能彻底防止地址欺骗、无法执行某些安全策略、安全性较差、一些应用协议不适合于数据包过滤、管理功能弱。</p>
+<h4 id="代理服务技术"><a href="#代理服务技术" class="headerlink" title="代理服务技术"></a>代理服务技术</h4><p>代理服务技术分为应用层网关和电路层网关。<br>代理服务器是指代表客户处理连接请求的程序。<br>代理防火墙工作在应用层，且针对特定的应用层协议。<br><strong>应用层网关防火墙</strong>是传统代理型防火墙，其核心技术就是代理服务器技术，它是基于软件的，通常安装在专用工作站系统上。它通过代理技术参与到一个TCP连接的全过程，并在网络应用层上建立协议过滤和转发功能。应用层网关防火墙被认为是最安全的防火墙。其优点是安全，缺点是速度相对较慢。<br><strong>电路层网关防火墙</strong>也称为自适应代理防火墙，有两个基本要素组成：自适应代理服务器、动态包过滤器。<br>自适应代理可以根据用户的配置信息，决定是使用代理服务从应用层代理请求还是从网络层转发数据包。</p>
+<p><strong>代理技术的优点</strong>是：代理易于配置；代理能生成各项记录；代理能灵活、完全地控制进出流量、内容；代理能过滤数据内容；代理能为用户提供透明的加密机制；代理可以方便地与其他安全手段集成。</p>
+<p><strong>代理技术的缺点</strong>是：代理速度较路由器慢；代理对用户不透明；对于每项服务代理可能要求不同的服务器；代理服务不能保证免受所有协议弱点的限制；代理不能改进底层协议的安全性。</p>
+<h4 id="状态检测技术"><a href="#状态检测技术" class="headerlink" title="状态检测技术"></a>状态检测技术</h4><p>状态检测防火墙也称为动态包过滤防火墙，结合了包过滤防火墙和代理服务器防火墙的长处，克服了两者的不足，能够根据协议、端口、源地址、目的地址的具体情况决定数据包是否允许通过。状态检测防火墙的优点是高安全性、高效性、可伸缩性和易扩展性、应用范围广。</p>
+<p>状态检测技术采用的是一种基于连接的状态检测机制，将属于同一连接的所有包作为一个整体的数据流看待，构成连接状态表，通过规则表与状态表的共同配合，对表中的各个连接状态因素加以识别。</p>
+<h4 id="NAT技术"><a href="#NAT技术" class="headerlink" title="NAT技术"></a>NAT技术</h4><p>NAT技术是网络地址转换技术，它是一种把内部私有IP地址翻译成合法网络IP地址的技术。<br>NAT技术有三种类型：静态NAT、动态NAT、网络地址端口转换NAPT。<br>NAT技术的优点是：所有内部的IP地址对外面的人来说是隐蔽的；NAT技术可以使整个内部网络共享一个IP地址；可以启用基本的包过滤防火墙安全机制。</p>
+<h3 id="防火墙的安全防护技术"><a href="#防火墙的安全防护技术" class="headerlink" title="防火墙的安全防护技术"></a>防火墙的安全防护技术</h3><p>防火墙产品固有的安全脆弱点和管理配置上的不当，使得黑客和入侵者可以通过获取防火墙标识穿透防火墙扫描，发现分组过滤和应用代理的脆弱点，进行攻击。所以对应的安全防护技术有：防止防火墙标识被获取、防止穿透防火墙进行扫描、克服分组过滤的脆弱点、克服应用代理的脆弱点。</p>
+<h3 id="个人防火墙"><a href="#个人防火墙" class="headerlink" title="个人防火墙"></a>个人防火墙</h3><p>个人防火墙是一个运行在单台计算机上的软件，它可以截取进出计算机的TCP/IP网络连接数据包，并使用预先定义的规则允许或禁止其连接。<br>个人防火墙的主要功能有IP数据包过滤功能、安全规则的修订功能、对特定网络攻击数据包的拦截功能、应用程序网络访问控制功能、网络快速切断/恢复功能、日志记录功能、网络攻击的报警功能、产品自身安全功能。<br><strong>IP数据包过滤功能</strong>中，每一条匹配规则一般包括下列要素：数据包方向、远程IP地址和协议的匹配类型。<br><strong>个人防火墙的特点</strong><br>优点有：</p>
+<ol>
+<li>增加了保护级别，不需要额外的硬件资源。</li>
+<li>个人防火墙除了可以抵挡外来攻击的同时，还可以抵挡内部的攻击。</li>
+<li>个人防火墙是对公共网络中的单个系统提供了保护，能够为用户隐藏暴露在网络上的信息，比如IP地址等。</li>
+</ol>
+<p>缺点有：</p>
+<ol>
+<li>个人防火墙对公共网络只有一个物理接口，导致个人防火墙本身容易受到威胁。</li>
+<li>个人防火墙在运行时需要占用个人计算机的CPU、内存等资源。</li>
+<li>个人防火墙只能对单机提供保护，不能保护网络系统。</li>
+</ol>
+<h3 id="防火墙的发展动态和趋势"><a href="#防火墙的发展动态和趋势" class="headerlink" title="防火墙的发展动态和趋势"></a>防火墙的发展动态和趋势</h3><p>现代防火墙正向着<strong>优良的性能</strong>、<strong>可扩展的结构和功能</strong>、<strong>积极主动过滤</strong>、<strong>防病毒与防黑客</strong>方向发展，同时<strong>简化安装</strong>、<strong>方便管理</strong>，并寻求与其他安全产品进行联动，以架构起立体的防护体系。</p>
+<p>防火墙与防病毒产品联动，可以在网关处查杀病毒，将病毒的发作限制在最小的可能；防火墙与认证系统联动，可以在指定安全策略时使用强度更大、安全性更高的认证体系；防火墙与入侵检测系统联动，可以对网络进行动静结合的保护，对网络行为进行细颗粒的检查，并对网络内外两个部分都进行可靠管理；防火墙与日志分析系统联动，可以解决防火墙对于大量日志数据的存储管理和数据分析上的不足。防火墙联动技术的发展，将使防火墙从众多的安全问题中解脱出来，与其他技术互补互益，架构起立体的防护体系。</p>
+<p>未来防火墙技术会全面考虑网络的安全、操作系统的安全、应用程序的安全、用户的安全和数据的安全，五者综合应用。</p>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"># 计算机网络安全</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/03/08/zk-04751-notes5/">[04751计算机网络安全]笔记-第5章 入侵检测技术</a>
+            
+            
+            <a class="next" rel="next" href="/2021/03/05/zk-04751-notes3/">[04751计算机网络安全]笔记-第3章 信息加密与PKI</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© 张小五 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

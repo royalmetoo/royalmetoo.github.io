@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="张小五">
+
+
+
+
+
+<title>Oracle/MySQL的安装与配置 | 大脑指挥手</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">大脑指挥手</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">大脑指挥手</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Oracle/MySQL的安装与配置</h1>
+            
+                <div class="post-meta">
+                    
+                        <a itemprop="author" rel="author" href="/">张小五</a>
+                    
+
+                    
+                        <span class="post-time">
+                         作于 <a href="#">2020年03月02日</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="Oracle的安装与配置"><a href="#Oracle的安装与配置" class="headerlink" title="Oracle的安装与配置"></a>Oracle的安装与配置</h2><p>我的安装平台是： centos7 + 12c2。</p>
+<p>关键内容总结：<br><strong>1.选择安装类型： “desk class” or “server class”</strong><br>答：学习目的或本地简单使用选择”desk class”，这个类别对安装以及机器配置要求都很低，非常方便。<br><strong>2.依赖安装。</strong><br>答： 如下命令检查，缺什么装什么：<br>rpm -q binutils compat-libcap1 compat-libstdc++-33 gcc gcc-c++ glibc glibc-devel ksh libaio libaio-devel libgcc libstdc++ libstdc++-devel libXi libXtst make sysstat unixODBC unixODBC-devel<br><strong>3.环境变量</strong><br>答：“PATH=$ORACLE_HOME/bin:$PATH”，只有配置了这个，才能直接在任何目录使用oracle命令。<br><strong>4.远程访问配置。</strong><br>答：防火墙、监听配置、TNS。<br>防火墙：可选择关闭，也可选择单独开放1521端口。<br>监听配置：直接修改localhost为IP。<br>TNS：需要同时修改实例和监听里的IP。<br><strong>5.客户端安装后没有tns及其目录。</strong><br>答：莫慌，自己按照结构去创建就好了: product\12.2.0\client_1\network\admin\tnsnames.ora<br><strong>6.用户登录问题</strong><br>答：12c安装过程中没有给启用一些系统用户和修改密码的机会，所以我们后台登录，先修改sys用户密码，再连接plsql developer进行用户创建等等操作。<br>sqlplus /nolog<br>conn / as sysdba<br>alter user sys identified by passwd;<br><strong>7.启停命令</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">## 启动</span><br><span class="line">lsnrctl status       # 查看监听及数据库状态</span><br><span class="line">lsnrctl start        # 启动监听</span><br><span class="line">sqlplus / as sysdba  # 以 DBA 身份进入 sqlplus</span><br><span class="line">SQL&gt;startup          # 启动 db</span><br><span class="line"></span><br><span class="line">## 停止</span><br><span class="line">lsnrctl stop            # 停止监听</span><br><span class="line">sqlplus / as sysdba     # 以 DBA 身份进入 sqlplus</span><br><span class="line">SQL&gt;shutdown immediate  # 关闭 db</span><br></pre></td></tr></table></figure>
+
+<h2 id="MySQL的安装与配置"><a href="#MySQL的安装与配置" class="headerlink" title="MySQL的安装与配置"></a>MySQL的安装与配置</h2><p>x86架构下的安装步骤网上大把，且也比较简单。不再赘述。</p>
+<p>ARM架构下主要问题在于包，可以在这里下载：<a target="_blank" rel="noopener" href="https://obs.cn-north-4.myhuaweicloud.com/obs-mirror-ftp4/database/mysql-5.7.27-aarch64.tar.gz">MySQL 5.2.27 for ARM 下载</a></p>
+<p>安装步骤如下：</p>
+<ol>
+<li>添加mysql用户组和mysql用户，用于隔离mysql进程<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@arm ~]# groupadd -r mysql &amp;&amp; useradd -r -g mysql -s /sbin/nologin -M mysql</span><br></pre></td></tr></table></figure></li>
+<li>安装依赖库<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@arm ~]# yum install -y libaio1  # apt install libaio1</span><br></pre></td></tr></table></figure></li>
+<li>下载解压Mysql<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@arm ~]# mv mysql-5.7.27-aarch64.tar.gz mysql-5.7.27-aarch64.tar   # 压缩包不是gz格式，需先改为tar格式再解压缩</span><br><span class="line">[root@arm ~]# tar xvf mysql-5.7.27-aarch64.tar -C /usr/local/</span><br></pre></td></tr></table></figure></li>
+<li>配置Mysql<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@arm ~]# mv /usr/local/mysql-5.7.27-aarch64 /usr/local/mysql</span><br><span class="line">[root@arm ~]# mkdir -p /usr/local/mysql/logs</span><br><span class="line">[root@arm ~]# chown -R mysql:mysql /usr/local/mysql</span><br><span class="line">[root@arm ~]# ln -sf /usr/local/mysql/my.cnf /etc/my.cnf</span><br><span class="line">## centos操作步骤，ubuntu aarch64不需要</span><br><span class="line">[root@arm ~]# cp -rf /usr/local/mysql/extra/lib* /usr/lib64/</span><br><span class="line">[root@arm ~]# mv /usr/lib64/libstdc++.so.6 /usr/lib64/libstdc++.so.6.old</span><br><span class="line">[root@arm ~]# ln -s /usr/lib64/libstdc++.so.6.0.24 /usr/lib64/libstdc++.so.6</span><br><span class="line">##</span><br><span class="line">## 但是ubuntu aarch64需要安装libncurses5，否则启动mysql命令时报错</span><br><span class="line">[root@arm ~]# apt install libncurses5</span><br><span class="line">##</span><br></pre></td></tr></table></figure>
+设置开机启动<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@arm ~]# cp -rf /usr/local/mysql/support-files/mysql.server /etc/init.d/mysqld</span><br><span class="line">[root@arm ~]# chmod +x /etc/init.d/mysqld</span><br><span class="line">[root@arm ~]# systemctl enable mysqld</span><br></pre></td></tr></table></figure></li>
+<li>添加环境变量<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@ecs-arm ~]# vi /etc/profile</span><br><span class="line">export MYSQL_HOME=/usr/local/mysql</span><br><span class="line">export PATH=$PATH:$MYSQL_HOME/bin</span><br><span class="line"></span><br><span class="line">[root@ecs-arm ~]# source /etc/profile</span><br></pre></td></tr></table></figure></li>
+<li>初始化启动mysql<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@ecs-arm ~]# mysqld --initialize-insecure --user=mysql --basedir=/usr/local/mysql --datadir=/usr/local/mysql/data</span><br><span class="line">[root@ecs-arm ~]# systemctl start mysqld</span><br><span class="line">[root@ecs-arm ~]# systemctl status mysqld</span><br></pre></td></tr></table></figure></li>
+<li>设置数据库root的密码<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mysql -uroot      # 我的这样可以直接免密进入</span><br><span class="line">alter user &#x27;root&#x27;@&#x27;localhost&#x27; identified with mysql_native_password by &#x27;passwd&#x27;;</span><br><span class="line">flush privileges;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>原文链接： <a target="_blank" rel="noopener" href="https://www.eee-eee.com/blog-news/91-linux-server/1093-arm%E6%9E%B6%E6%9E%84%E4%B8%8B%E9%9D%A2%E5%AE%89%E8%A3%85mysql5-7-22.html">ARM架构下面安装mysql5.7.22</a></p>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/mysql/"># mysql</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/03/17/architect/">(转)架构师应该具备的能力</a>
+            
+            
+            <a class="next" rel="next" href="/2020/02/23/hexo-for-rspi4/">树莓派下构建Hexo博客</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© 张小五 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

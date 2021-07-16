@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="张小五">
+
+
+
+
+
+<title>[04751计算机网络安全]笔记-第7章 计算机病毒与恶意代码防范技术 | 大脑指挥手</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">大脑指挥手</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">大脑指挥手</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">[04751计算机网络安全]笔记-第7章 计算机病毒与恶意代码防范技术</h1>
+            
+                <div class="post-meta">
+                    
+                        <a itemprop="author" rel="author" href="/">张小五</a>
+                    
+
+                    
+                        <span class="post-time">
+                         作于 <a href="#">2021年03月08日</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h3 id="计算机病毒"><a href="#计算机病毒" class="headerlink" title="计算机病毒"></a>计算机病毒</h3><p><strong>计算机病毒</strong>是指编制或者在计算机程序中插入的破坏计算机功能或者毁坏数据，影响计算机使用，并能自我复制的一组计算机指令或者程序代码。<br>美国计算机安全专家Fred Cohen博士认为：计算机病毒是一种能传染其他程序的程序，病毒是靠修改其他程序，并把自身的复制嵌入到其他程序而实现的。</p>
+<p>计算机病毒的<strong>特征</strong>是非授权可执行性、隐蔽性、传染性、潜伏性、破坏性和可触发性。</p>
+<p>计算机病毒的<strong>危害</strong>有直接破坏计算机数据信息、占用磁盘空间和对信息的破坏、抢占系统资源、影响计算机运行速度、计算机病毒错误与不可预见的危害、计算机病毒的兼容性对系统运行的影响、给用户造成严重的心理压力。</p>
+<p>计算机病毒是一种具有很高编程技巧、短小精悍的可执行程序。<br>传染性是计算机病毒最重要的特征，是判断一段程序代码是否为计算机病毒的依据。<br>病毒程序的表现性或破坏性体现了病毒设计者的真正意图。</p>
+<h3 id="计算机病毒的结构"><a href="#计算机病毒的结构" class="headerlink" title="计算机病毒的结构"></a>计算机病毒的结构</h3><p><strong>病毒的逻辑结构</strong>是由病毒的引导模块、病毒的传染模块、病毒的发作模块(也叫表现和破坏模块)三部分组成。<br>计算机病毒要对系统进行破坏，争夺系统控制权是至关重要的，一般的病毒都是由引导模块从系统获取控制权，引导病毒的其他部分工作。<br>计算机病毒的传染模块担负着计算机病毒的扩散传染任务，它是判断一个程序是否是病毒的首要条件，是各种病毒必不可少的模块。</p>
+<p>经格式化后的<em><strong>磁盘空间结构</strong></em>应包括：主引导记录区(硬盘)、引导记录区、文件分配表(FAT)、目录区和数据区。其中主引导记录区和引导记录区存放DOS系统启动时所用的信息；FAT是反映当前磁盘区使用状况的表；目录区存放磁盘上现有的文件目录及其大小、存放时间等信息；数据区存储和文件名对应的文件内容数据。<br><strong>系统型病毒的磁盘存储结构</strong>：病毒的一部分存放在磁盘的引导扇区中，另一部分存放在磁盘其他扇区中。<br><strong>文件型病毒的磁盘存储结构</strong>：文件型病毒程序依附在被感染文件的首部、尾部、中部或空闲部位，病毒程序所占用的磁盘空间依赖于其宿主程序所占用的磁盘空间，病毒入侵后一定会使宿主程序占用的磁盘空间增加。</p>
+<p><strong>系统型病毒的内存驻留结构</strong>：系统型病毒主要存放在内存高端，但并不是唯一选择，计算机病毒无孔不入。<br><strong>文件型病毒的内存驻留结构</strong>：根据驻留内存方式可分为高端驻留型、常规驻留型、内存控制链驻留型、不驻留内存型。</p>
+<p>计算机病毒的的作用机制根据其对应的结构分别为引导机制、传染机制和破坏机制。</p>
+<h3 id="计算机病毒的分类"><a href="#计算机病毒的分类" class="headerlink" title="计算机病毒的分类"></a>计算机病毒的分类</h3><p><strong>按照病毒攻击的系统分类</strong>：攻击DOS系统的病毒；攻击Windows系统的病毒；攻击UNIX系统的病毒；攻击OS/2系统的病毒。</p>
+<p><strong>按照病毒的攻击机型分类</strong>：攻击微型计算机的病毒；攻击小型机的计算机病毒；攻击工作站的计算机病毒。</p>
+<p><strong>按照病毒的链接方式分类</strong>：源码型病毒；嵌入型病毒；外壳型病毒；操作系统型病毒。<br>源码型病毒攻击高级语言编写的程序，该病毒在高级语言所编写的程序编译前插入到源程序中，经编译称为合法程序的一部分。<br>嵌入型病毒是将自身嵌入到现有程序中，把计算机病毒的主体程序与其攻击的对象以插入的方式链接。<br>外壳型病毒将其自身包围在主程序的四周，对原来的程序不进行修改。<br>操作系统型病毒把自己的程序加入或取代部分操作系统进行工作，具有很强的破坏力，可导致整个系统的瘫痪。比如圆点病毒和大麻病毒。</p>
+<p><strong>按照病毒的破坏情况分类</strong>：良性计算机病毒；恶性计算机病毒。<br>良性计算机病毒是指其不包含有立即对计算机系统产生直接破坏作用的代码。比如小球病毒、1575/1591病毒、救护车病毒、扬基病毒和Dabi病毒。<br>恶性计算机病毒是指其代码中包含有损伤和破坏计算机系统的操作，在其传染或发作时会对系统产生直接的破坏作用。比如星期五病毒、火炬病毒、米开朗基罗病毒。</p>
+<p><strong>按照病毒的寄生方式分类</strong>：引导性病毒；文件型病毒；复合型病毒。<br>引导型病毒是指寄生在磁盘引导区或主引导区的计算机病毒。又分为主引导记录病毒和分区引导记录病毒。主引导记录病毒又大麻病毒、2708病毒、火炬病毒等；分区引导记录病毒有小球病毒、Girl病毒等。<br>文件型病毒是指能够寄生在文件中的计算机病毒。<br>复合型病毒是指具有引导型病毒和文件型病毒寄生方式的计算机病毒。比如Flip病毒、新世纪病毒、One-half病毒等。</p>
+<p><strong>按照病毒的传播媒介分类</strong>：单机病毒；网络病毒。<br>单机病毒的载体是磁盘。<br>网络病毒的载体是网络通道。</p>
+<p>宏病毒就是利用软件所支持的宏命令编写成的具有复制、传染能力的宏。<br>网络病毒实际上是一个笼统的概念。一种情况是，网络病毒专指在网络传播，并对网络进行破坏的病毒；另一种情况是，网络病毒指的是HTML病毒、E-mail病毒、Java病毒等于因特网有关的病毒。<br>网络病毒的特点是：传染方式多、传播速度比较快、清除难度大、破坏性强、潜在性深。</p>
+<h3 id="计算机病毒的检测"><a href="#计算机病毒的检测" class="headerlink" title="计算机病毒的检测"></a>计算机病毒的检测</h3><p>计算机病毒的检测要从检查系统资源的异常情况入手。</p>
+<p>计算机病毒的<strong>检测依据</strong>有检查磁盘主引导扇区、检查FAT表、检查中断向量、检查可执行文件、检查内存空间、检查特征串。<br>磁盘的主引导扇区、分区表，以及文件分配表、文件目录区是病毒攻击的主要目标。<br>病毒最常攻击的中断有：磁盘输入/输出中断(13H)，绝对读、写中断(25H、26H)，时钟中断(08H)。<br>检查可执行文件的重点是在这些程序的头部即前面的20字节左右，因为病毒主要改变文件的起始部分。</p>
+<p>计算机病毒的<strong>检测手段</strong>有特征代码法、校验和法、行为监测法、软件模拟法。<br>特征代码法的实现步骤如下：采集已知病毒样本；抽取病毒特征代码，将特征代码纳入病毒数据库；打开被检测文件，搜索文件中是否包含有病毒数据中的特征代码。<br>特征代码法的特点是：速度慢、误报警率低、不能检查多形性病毒、不能对付隐蔽性病毒。<br>校验和法的优点是：方法简单，能发现未知病毒、被查文件的细微变化也能发现；校验和法的缺点是：会误报警、不能识别病毒名称、不能对付隐蔽型病毒。<br>行为检测法的优点是：可发现未知病毒、可相当准确地预报未知的多数病毒；行为检测法的缺点是：可能误报警、不能识别病毒名称、实现时有一定难度。</p>
+<h3 id="计算机病毒的防范"><a href="#计算机病毒的防范" class="headerlink" title="计算机病毒的防范"></a>计算机病毒的防范</h3><p>防范计算机病毒主要从管理和技术两方面着手：严格的管理、有效的技术、宏病毒的防范、电子邮件病毒的方面。<br>预防病毒的主要技术有：将大量的杀毒软件汇集一体，检查是否存在已知病毒；检查一些病毒经常要改变的系统信息；检测写盘操作，对引导区或主引导区的写操作报警；对计算机系统中的文件形成一个密码校验码和实现对象程序完整性的验证，在程序执行前或定期对程序进行密码校验；智能判断；智能监察。<br>电子邮件病毒的防护主要有：</p>
+<ol>
+<li>思想上高度重视，不要轻易打开来信中的附件文件。</li>
+<li>不断完善网关软件及病毒防火墙软件，加强对整个网络入口点的防范。</li>
+<li>使用优秀的防病毒软件同时保护客户机和服务器。</li>
+<li>使用特定的SMTP杀毒软件。</li>
+</ol>
+<h3 id="计算机病毒的发展趋势"><a href="#计算机病毒的发展趋势" class="headerlink" title="计算机病毒的发展趋势"></a>计算机病毒的发展趋势</h3><p>计算机病毒的新特性有：</p>
+<ol>
+<li>利用微软漏洞主动传播。</li>
+<li>局域网内快速传播。</li>
+<li>以多种方式传播。</li>
+<li>大量消耗系统与网络资源。</li>
+<li>双程序结构。</li>
+<li>用即时工具传播病毒。</li>
+<li>病毒与黑客技术的融合。</li>
+<li>应用软件漏洞称为网页挂马的新宠。</li>
+</ol>
+<p>未来计算机病毒的特点：</p>
+<ol>
+<li>变形病毒成为下一代病毒首要的特点。</li>
+<li>与Internet和Intranet更加紧密地结合，利用一切可以利用的方式进行传播。</li>
+<li>具有混合型特征。</li>
+<li>扩散性极快且更加注重欺骗性。</li>
+<li>利用系统和应用程序漏洞作为有力的传播方式。</li>
+</ol>
+<p>作为新一代的反病毒软件，必须做到以下几点：</p>
+<ol>
+<li>全面地与互联网结合，不仅有传统的手动查杀与文件监控，还必须对网络层、邮件客户端进行实时监控，防止病毒入侵。</li>
+<li>快速反应的病毒检测网，在病毒爆发的第一时间即能提供解决方案。</li>
+<li>完善的在线升级服务，使用户随时拥有最新的防病毒能力。</li>
+<li>对病毒经常攻击的应用程序提供重点保护。</li>
+<li>提供完整、即时的反病毒咨询，提高用户的反病毒意识与警觉性，尽快地让用户了解到新病毒的特点和解决方案。</li>
+</ol>
+<h3 id="恶意代码"><a href="#恶意代码" class="headerlink" title="恶意代码"></a>恶意代码</h3><p>恶意代码是一种程序，通常在人们没有察觉的情况下把代码寄宿到另一段程序中，从而达到破坏被感染计算机的数据，运行具有入侵性或破坏性的程序，破坏被感染系统数据的安全性和完整性目的。</p>
+<p>恶意代码的<strong>特征</strong>有：恶意的目的、本身是程序、通过执行发生作用。</p>
+<p>恶意代码的<strong>分类</strong>有：木马、网络蠕虫、移动代码、复合型病毒。<br>网络蠕虫是一种可以自我复制的完全独立的程序，其传播过程不需要借助于被感染主机中的其他程序。<br>移动代码是能够从主机传输到客户端计算机上并执行的代码，它通常是作为病毒、蠕虫、木马等的一部分被传送到目标计算机。<br>恶意代码通过多种方式传播就形成了复合型病毒。</p>
+<p>恶意代码的<strong>关键技术</strong>有生存技术、攻击技术和隐藏技术。<br><strong>生存技术</strong>主要包括四个方面：反跟踪技术、加密技术、模糊变换技术和自动生产技术。<br>目前常用的反跟踪技术有两类：反动态跟踪技术和反静态跟踪技术。反动态跟踪技术主要包括四大类：禁止跟踪终端；封锁键盘输入和屏幕显示，破坏各类跟踪调试软件的运行环境；检测跟踪；其他反跟踪技术。反静态跟踪技术主要包括两大类：对程序代码分块加密执行；伪指令法。<br>从加密内容划分，加密手段分为信息加密、数据加密和代码加密是那种。<br>模糊变换技术主要包括：指令替换法、指令压缩法、指令扩展法、伪指令技术、重编译技术。<br>自动生产技术包括计算机病毒生成器技术和多态性发生器技术。多态性发生器可以使恶意代码本身发生变化，并保持原有功能。</p>
+<p><strong>攻击技术</strong>有：进程注入技术、三线程技术、端口复用技术、对抗检测技术、端口反向连接技术和缓冲区溢出攻击技术等。<br>进程注入技术就是将系统服务和网络服务的程序的可执行代码作为载体，将恶意代码程序自身嵌入到其中，实现自身隐藏和启动的目的。<br>三线程技术是指一个恶意代码进程同时开启三个线程，其中一个是主线程，负责具体的恶意功能；一个是监视线程，负责检查恶意代码的状态；一个是守护线程注入其他可执行文件内，与恶意代码进程同步，一旦恶意代码线程被停止，守护线程会重新启动该线程，从而保证恶意代码执行的持续性。<br>端口复用技术是指重复利用系统已打开的服务端口传送数据，从而可以躲避防火墙对端口的过滤。<br>端口反向连接技术就是利用防火墙的这种特性从被控制端主动发起向控制端的连接。<br>缓冲区溢出攻击主要是向存在溢出漏洞的服务程序发生精心构造的攻击代码，是获取远程目标主机管理权限的主要手段，是恶意代码进行主动传播的主要途径。</p>
+<p><strong>隐藏技术</strong>有：本地隐藏和通信隐藏。本地隐藏又有文件隐藏、进程隐藏、网络连接隐藏和内核模块隐藏等；通信隐藏主要包括通信内容隐藏和传输通道隐藏。<br>本地隐藏是指为了防止本地系统管理人员察觉而采取的隐蔽手段。本地隐藏的技术手段可以分为三类：第一类是将恶意代码隐藏于合法程序中；第二类是修改或替换某些系统管理命令或其依赖的系统调用；第三类是分析管理命令的执行机制和若段，然后利用发现的弱点避过管理命令的检查，可以达到不修改管理命令而实现隐藏的目的。<br>常用的网络通信隐蔽技术有http tunnel和icmp tunnel等。http tunnel是一种将网络通信内容用http协议进行二次封装的通信技术，可以有效穿透防火墙、躲避入侵检测系统检测；icmp tunnel则是一种将网络通信内容用icmp协议进行封装，模拟成常规的网络管理报文，也可以躲避入侵检测系统的检测。</p>
+<h3 id="网络蠕虫"><a href="#网络蠕虫" class="headerlink" title="网络蠕虫"></a>网络蠕虫</h3><p>网络蠕虫是一种智能化、自动化、综合网络攻击、密码学和计算机病毒技术，不需要计算机使用者干预即可运行的攻击程序或代码，能够扫描和攻击网络上存在系统漏洞的节点主机，通过局域网或者国际互联网从一个结点传播到另外一个结点。</p>
+<p>网络蠕虫具有主动攻击、行动隐蔽、利用漏洞、造成网络堵塞、降低系统性能、产生安全隐患、反复性和破坏性等特征。</p>
+<p>网络蠕虫的<strong>功能模块</strong>可以分为主体功能模块和辅助功能模块。<br><strong>主体功能模块</strong>负责完成复制传播流程。<br>其主要由四个模块构成：1.<em><strong>信息搜索模块</strong></em>决定采用何种搜索算法对本地或目标网络进行信息搜索，包括本机系统信息、用户信息、邮件列表、对本机的信任或授权的主机、本机所处网络的拓扑结构、便捷路由信息等；2.<em><strong>扫描探测模块</strong></em>完成对特定主机的脆弱性检测，决定采用何种攻击渗透方式；3.<em><strong>攻击渗透模块</strong></em>利用扫描探测模块获得的安全漏洞，建立传播途径；4.<em><strong>自我推进模块</strong></em>可以采用各种形式生成各种形态的蠕虫副本，并在不同主机间完成蠕虫副本传递。</p>
+<p><strong>辅助功能模块</strong>使蠕虫程序具有更强的生存能力和破坏能力。<br>其主要由五个模块构成：1.<em><strong>实体隐藏模块</strong></em>包括对蠕虫各个实体组成部分的隐藏、变形、加密及进程的隐藏，其主要目的是提高蠕虫的生存能力；2.<em><strong>宿主破坏模块</strong></em>用于摧毁或破坏被感染主机，破坏网络正常运行，在被感染主机上留下后门等；3.<em><strong>信息通信模块</strong></em>能使蠕虫间、蠕虫同攻击者之间进行交流；4.<em><strong>远程控制模块</strong></em>的功能是调整蠕虫行为，控制被感染主机，执行蠕虫控制者下达的指令；5.<em><strong>自动升级模块</strong></em>可以是蠕虫控制者随时更新其他模块的功能，从而实现不同的攻击目的。</p>
+<p>按照蠕虫对目标地址空间的选择方式进行分类，蠕虫扫描策略可以分为：选择性随机扫描和顺序扫描和基于目标列表的扫描、分治扫描、基于路由的扫描和基于DNS扫描等。</p>
+<h3 id="Rootkit技术"><a href="#Rootkit技术" class="headerlink" title="Rootkit技术"></a>Rootkit技术</h3><p>Rootkit是攻击者用来隐藏自己的跟踪和维持远程管理员访问权限的工具。一个典型的Rootkit通常包括：以太网嗅探程序、特洛伊木马程序、隐藏攻击者的目录和进程的程序、日志清理工具。</p>
+<p>一个典型的Rootkit通常包括：以太网嗅探程序，特洛伊木马程序，隐藏攻击者的目录和进程的程序，日志清理工具。</p>
+<p>Windows系统下的Rootkit关键技术有进程隐藏技术和文件隐藏技术。</p>
+<ul>
+<li><strong>进程隐藏技术</strong>主要有五大类：远程线程注入技术、基于SPI的进程隐藏技术、基于svchost服务的进程隐藏技术、基于修改活动进程链表的进程隐藏技术、基于Hook SSDT的进程隐藏技术。</li>
+<li><strong>文件隐藏技术</strong>主要包括用户态文件隐藏技术和内核态文件隐藏技术。用户态隐藏技术主要通过API Hook方法来实现，基本思想是把要hook的函数封装在一个Dll文件中，然后将该Dll文件以远程线程的方式插入到需要进行API Hook的进程中；内核态文件隐藏技术则是通过驱动程序拦截枚举一个目录里面所有的文件和它的子目录下的所有文件和函数NtQueryDirectoryFile()。</li>
+</ul>
+<p>Linux系统的Rootkit关键技术是LKMs技术。LKMs即可卸载的内核模块。在Rootkit中通常要用到的LKMs技术有：隐藏文件、隐藏进程、隐藏网络连接、重定向可执行文件、隐藏sniffer、隐藏LKMs本身。</p>
+<h3 id="恶意代码的防范"><a href="#恶意代码的防范" class="headerlink" title="恶意代码的防范"></a>恶意代码的防范</h3><p>恶意代码的防范主要通过及时更新系统，修补安全漏洞；设置安全策略，限制脚本程序的运行；启用防火墙，过滤不必要的服务和系统信息；养成良好的上网习惯。</p>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"># 计算机网络安全</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/03/08/zk-04751-notes8/">[04751计算机网络安全]笔记-第8章 网络安全解决方案</a>
+            
+            
+            <a class="next" rel="next" href="/2021/03/08/zk-04751-notes6/">[04751计算机网络安全]笔记-第6章 网络安全检测技术</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© 张小五 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

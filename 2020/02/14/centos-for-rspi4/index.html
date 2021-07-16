@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="张小五">
+
+
+
+
+
+<title>树莓派4安装centos | 大脑指挥手</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">大脑指挥手</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">大脑指挥手</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">树莓派4安装centos</h1>
+            
+                <div class="post-meta">
+                    
+                        <a itemprop="author" rel="author" href="/">张小五</a>
+                    
+
+                    
+                        <span class="post-time">
+                         作于 <a href="#">2020年02月14日</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p><img src="/img/raspberry/rspi4.jpg"></p>
+<p><strong>1.树莓派安装64位centos系统</strong></p>
+<p>镜像下载地址： <a target="_blank" rel="noopener" href="https://people.centos.org/pgreco/">https://people.centos.org/pgreco/</a></p>
+<p>下载包为： CentOS-Userland-7-aarch64-RaspberryPI-<strong>Minimal-4</strong>-1908-sda.raw.xz</p>
+<p>解压出raw包，然后使用Win32DiskImager烧写到SD卡</p>
+<p>默认用户： root / centos</p>
+<p>或者通过百度网盘下载：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">链接：https://pan.baidu.com/s/19dU1xVa6FrlGI8s5DbFJQg </span><br><span class="line">提取码：kd7q </span><br></pre></td></tr></table></figure>
+
+<p>如果SD卡之前已经烧录了镜像，可使用如下镜像进行还原：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">链接：https://pan.baidu.com/s/1FcMEi9OvPGTO3hYJF0nWaA </span><br><span class="line">提取码：jxis </span><br></pre></td></tr></table></figure>
+
+<p><strong>2.扩展RootFS以使用整个SD卡容量</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# df -h</span><br><span class="line">文件系统        容量  已用  可用 已用% 挂载点</span><br><span class="line">/dev/root       2.0G  1.3G  722M   64% /</span><br><span class="line">devtmpfs        1.9G     0  1.9G    0% /dev</span><br><span class="line">tmpfs           1.9G     0  1.9G    0% /dev/shm</span><br><span class="line">tmpfs           1.9G   17M  1.9G    1% /run</span><br><span class="line">tmpfs           1.9G     0  1.9G    0% /sys/fs/cgroup</span><br><span class="line">/dev/mmcblk0p1  286M   51M  235M   18% /boot</span><br><span class="line">tmpfs           381M     0  381M    0% /run/user/0</span><br><span class="line">[root@localhost ~]# fdisk /dev/mmcblk0</span><br><span class="line">欢迎使用 fdisk (util-linux 2.23.2)。</span><br><span class="line"></span><br><span class="line">更改将停留在内存中，直到您决定将更改写入磁盘。</span><br><span class="line">使用写入命令前请三思。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">命令(输入 m 获取帮助)：p      # 查看分区</span><br><span class="line"></span><br><span class="line">磁盘 /dev/mmcblk0：128.0 GB, 128043712512 字节，250085376 个扇区</span><br><span class="line">Units = 扇区 of 1 * 512 = 512 bytes</span><br><span class="line">扇区大小(逻辑/物理)：512 字节 / 512 字节</span><br><span class="line">I/O 大小(最小/最佳)：512 字节 / 512 字节</span><br><span class="line">磁盘标签类型：dos</span><br><span class="line">磁盘标识符：0x00035af2</span><br><span class="line"></span><br><span class="line">        设备 Boot      Start         End      Blocks   Id  System</span><br><span class="line">/dev/mmcblk0p1   *        8192      593919      292864    c  W95 FAT32 (LBA)</span><br><span class="line">/dev/mmcblk0p2          593920     1593343      499712   82  Linux swap / Solaris</span><br><span class="line">/dev/mmcblk0p3         1593344     5890047     2148352   83  Linux</span><br><span class="line"></span><br><span class="line">命令(输入 m 获取帮助)：n      # 新建分区4</span><br><span class="line">Select (default e): p</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">命令(输入 m 获取帮助)：d      # 删除分区</span><br><span class="line">分区号 (1-4，默认 4)：3</span><br><span class="line"></span><br><span class="line">命令(输入 m 获取帮助)：n      # 新建分区</span><br><span class="line">Select (default e): p</span><br><span class="line">已选择分区 3</span><br><span class="line"></span><br><span class="line">命令(输入 m 获取帮助)：d      # 删除分区</span><br><span class="line">分区号 (1-4，默认 4)：</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">命令(输入 m 获取帮助)：p      # 查看分区</span><br><span class="line"></span><br><span class="line">磁盘 /dev/mmcblk0：128.0 GB, 128043712512 字节，250085376 个扇区</span><br><span class="line">Units = 扇区 of 1 * 512 = 512 bytes</span><br><span class="line">扇区大小(逻辑/物理)：512 字节 / 512 字节</span><br><span class="line">I/O 大小(最小/最佳)：512 字节 / 512 字节</span><br><span class="line">磁盘标签类型：dos</span><br><span class="line">磁盘标识符：0x00035af2</span><br><span class="line"></span><br><span class="line">        设备 Boot      Start         End      Blocks   Id  System</span><br><span class="line">/dev/mmcblk0p1   *        8192      593919      292864    c  W95 FAT32 (LBA)</span><br><span class="line">/dev/mmcblk0p2          593920     1593343      499712   82  Linux swap / Solaris</span><br><span class="line">/dev/mmcblk0p3         1593344   250085375   124246016   83  Linux</span><br><span class="line"></span><br><span class="line">命令(输入 m 获取帮助)：w     # 保存分区</span><br><span class="line">The partition table has been altered!</span><br><span class="line"></span><br><span class="line">Calling ioctl() to re-read partition table.</span><br><span class="line"></span><br><span class="line">WARNING: Re-reading the partition table failed with error 16: 设备或资源忙.</span><br><span class="line">The kernel still uses the old table. The new table will be used at</span><br><span class="line">the next reboot or after you run partprobe(8) or kpartx(8)</span><br><span class="line">正在同步磁盘。</span><br><span class="line">[root@localhost ~]# </span><br><span class="line">[root@localhost ~]#  reboot  # 重启系统</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# resize2fs /dev/mmcblk0p3</span><br><span class="line">resize2fs 1.42.9 (28-Dec-2013)</span><br><span class="line">Filesystem at /dev/mmcblk0p3 is mounted on /; on-line resizing required</span><br><span class="line">old_desc_blocks = 1, new_desc_blocks = 15</span><br><span class="line">The filesystem on /dev/mmcblk0p3 is now 31061504 blocks long.</span><br><span class="line"></span><br><span class="line">[root@localhost ~]# </span><br><span class="line">[root@localhost ~]# df -h</span><br><span class="line">文件系统        容量  已用  可用 已用% 挂载点</span><br><span class="line">/dev/root       117G  1.3G  116G    2% /</span><br><span class="line">devtmpfs        1.9G     0  1.9G    0% /dev</span><br><span class="line">tmpfs           1.9G     0  1.9G    0% /dev/shm</span><br><span class="line">tmpfs           1.9G   17M  1.9G    1% /run</span><br><span class="line">tmpfs           1.9G     0  1.9G    0% /sys/fs/cgroup</span><br><span class="line">/dev/mmcblk0p1  286M   51M  235M   18% /boot</span><br><span class="line">tmpfs           381M     0  381M    0% /run/user/0</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><em>Tips</em>:<br>1.务必要先新建第4个分区后再重建第3个分区，否则不仅无法扩充容量，还会导致系统无法启动。<br>2.新建分区的提示可以一路默认，需要定制空间的才需要输入。</p>
+<p><strong>3. 更换国内yum源(可选)</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo_bak</span><br><span class="line"></span><br><span class="line">[root@localhost ~]# wget http://mirrors.aliyun.com/repo/Centos-altarch-7.repo -O /etc/yum.repos.d/CentOS-Base.repo</span><br><span class="line"></span><br><span class="line">[root@localhost ~]# yum clean all</span><br><span class="line"></span><br><span class="line">[root@localhost ~]# yum makecache</span><br></pre></td></tr></table></figure>
+
+
+<p>至此，开始旅程吧！</p>
+<p>参考资料：</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://www.michaelapp.com/posts/2018/2018-09-13-%E6%A0%91%E8%8E%93%E6%B4%BE-slurm%E5%AE%89%E8%A3%85/">Michael.Pan的博客《树莓派64位CentOS安装》</a></li>
+</ol>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/raspberrypi/"># raspberrypi</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/02/23/hexo-for-rspi4/">树莓派下构建Hexo博客</a>
+            
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© 张小五 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

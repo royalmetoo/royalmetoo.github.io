@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="张小五">
+
+
+
+
+
+<title>[04751计算机网络安全]笔记-第3章 信息加密与PKI | 大脑指挥手</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">大脑指挥手</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">大脑指挥手</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">[04751计算机网络安全]笔记-第3章 信息加密与PKI</h1>
+            
+                <div class="post-meta">
+                    
+                        <a itemprop="author" rel="author" href="/">张小五</a>
+                    
+
+                    
+                        <span class="post-time">
+                         作于 <a href="#">2021年03月05日</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h3 id="信息加密"><a href="#信息加密" class="headerlink" title="信息加密"></a>信息加密</h3><p>信息加密是保障信息安全最核心的技术措施和理论基础，它采用密码学的原理与方法对信息进行可逆的数学变换，从而使非法接入者无法理解信息的真正含义，达到保证信息机密性的目的。</p>
+<h3 id="密码学"><a href="#密码学" class="headerlink" title="密码学"></a>密码学</h3><p>密码学的发展经历了三个阶段：古代加密方法、古典密码和近代密码。<br>密码学作为数学的一个分支，是研究信息系统安全保密的科学，是免密编码学和密码分析学的统称。密码编码学是关于消息保密的技术和科学；密码分析学是研究如何破译密码的科学和技术。<br>在密码学中，有一个五元组：{明文P，密文C，密钥K，加密算法E，解密算法D}，对应的加密方案称为密钥体制(或密码)。</p>
+<p>密码体制从原理上可分为两类：单钥或对称密码体制、双钥或非对称密码体制。</p>
+<p><strong>单钥密码体制</strong>的本质特征是所用的加密密钥和解密密钥相同。典型方法有代码加密、代替加密、变位加密和一次性密码簿加密等。<br>单钥密码体制的基本元素包括原始的明文、加密算法、密钥、密文及攻击者。<br>单钥密码体制的安全性主要取决于：加密算法的安全性、密钥的安全性。<br>单钥密码算法的优点主要体现在其加密、解密处理速度快、保密度高等，其缺点主要体现在：</p>
+<ol>
+<li>密钥是保密通信安全的关键，发信方必须安全、妥善地把密钥护送到收信方，不能泄露其内容。</li>
+<li>多人通信时密钥组合的数量会出现爆炸性膨胀，使密钥分发更加复杂化。</li>
+<li>通信双方必须统一密钥，才能发送保密的信息。</li>
+<li>数字签名困难。</li>
+</ol>
+<p><strong>双钥密码体制</strong>的主要特点是将加密和解密能力分开。双钥密码算法是基于数学问题求解的困难性；双钥密码体制是非对称的，它使用两个独立的密码，一个可以公开，称为公钥，另一个不能公开，称为私钥。<br>双钥密码体制的优点是可以公开加密密钥，密钥管理比较简单，还可以数字签名，其缺点是双钥密码算法一般比较复杂，加解密速度慢。</p>
+<h3 id="加密算法"><a href="#加密算法" class="headerlink" title="加密算法"></a>加密算法</h3><p>加密算法经历了古典密码、对称密钥密码(单钥密码体制)和公开密钥密码(双钥密码体制)三个发展阶段。</p>
+<p><strong>古典密码算法</strong>主要有代码加密、代替加密、变位加密和一次性密码簿加密等几种方法。其中代替加密有几种实现方式：简单代替密码或单字母密码、多名或同音代替、多表代替以及多字母或多码代替。<br>简单代替密码有：移位密码、替换密码、仿射密码、乘法密码、多项代替密码和密钥短语密码。</p>
+<p><strong>单钥密钥体制</strong>有序列密码(也称流密码)和分组免密。典型的单钥加密算法有DES和IDEA。</p>
+<ul>
+<li><strong>DES</strong>即数据加密标准，由美国国家标准局公布，密钥长度为64bit。DES的整个体制是公开的，系统的安全性主要依赖于密钥的保密，其算法主要由初始置换IP、16轮迭代的乘积变换、逆初始置换IP<sup>-1</sup>及16个子密钥产生器构成。乘积变换是DES算法的核心部分，主要完成DES的迭代运算。</li>
+<li><strong>IDEA</strong>即国际数据加密算法，它的密钥长度为128bit。</li>
+</ul>
+<p><strong>双钥密码体制</strong>应用模式有两种：一种是多个用户用公钥加密的消息可由一个用户用私钥解密；另一种是一个用户用私钥加密的信息可被多个用户用公钥解密。双钥密码体制主要用于认证和密钥管理等，而消息加密仍采用私钥免密体制。典型的双钥加密算法有RSA加密算法。<br><strong>RSA</strong>体制是用数论构造双钥的方法，它既可以用于加密，也可用于数字签名。RSA算法的安全性建立在数论中“大数分解和素数检测”的理论基础上。<br>双钥密码体制算法按由公钥推算出密钥的途径可分为两类：一类是基于素数因子分解问题，代表有RSA算法；另一类是基于离散对数问题，代表有ElGamal算法。</p>
+<h3 id="信息加密技术应用"><a href="#信息加密技术应用" class="headerlink" title="信息加密技术应用"></a>信息加密技术应用</h3><p>在网络安全领域，网络数据加密是解决通信网中信息安全的有效方法。常见的网络数据加密方式主要有链路加密、节点加密和端到端加密。</p>
+<ul>
+<li><strong>链路加密</strong>是对网络中两个相邻节点之间传输的数据进行加密防护。常用于点对点的同步或异步线路上。</li>
+<li><strong>节点加密</strong>是指在信息传输路过的节点处进行解密和加密。节点加密要求报头和路由信息以明文形式传输。</li>
+<li><strong>端到端加密</strong>是指对一对用户之间的数据连续地提供保护。端对端加密通常不允许对消息的目的地址进行加密。</li>
+</ul>
+<h3 id="认证技术"><a href="#认证技术" class="headerlink" title="认证技术"></a>认证技术</h3><p>加密是为了隐蔽消息的内容，而认证的目的有三个：一是消息完整性认证；二是身份认证；三是消息的序号和操作时间等的认证。<br>认证技术是防止不法分子对信息系统进行主动攻击的一种重要技术。<br>认证技术分三个层次：安全管理协议、认证体制和密码体制。</p>
+<ul>
+<li><strong>安全管理协议</strong>的主要任务是在安全体制的支持下，建立、强化和实施整个网络系统的安全策略。</li>
+<li><strong>认证体制</strong>在安全管理协议的控制和密码体制的支持下，完成各种认证功能。</li>
+<li><strong>密码体制</strong>是认证技术的基础，它为认证体制提供数学方法支持。</li>
+</ul>
+<p>典型的<strong>安全管理协议</strong>有公用管理信息协议(CMIP)、简单网络管理协议(SNMP)和分布式安全管理协议(DSM)。<br>典型的<strong>认证体制</strong>有Kerberos体制、X.509体制和Light Kryphtonight体制。</p>
+<p>一个安全的认证体制应该至少满足以下要求：</p>
+<ol>
+<li>意定的接收者能够校验和证实消息的合法性、真实性和完整性。</li>
+<li>消息的发送者对所发的消息不能抵赖，有时也要求消息的接收者不能否认收到的消息。</li>
+<li>除了合法的消息发送者外，其他人不能伪造发送消息。</li>
+</ol>
+<p><strong>数字签名技术</strong>是一种实现消息完整性认证和身份认证的重要技术。<br>一个数字签名方案有安全参数、消息空间、签名、密钥生成算法、签名算法和验证算法等构成。<br>从接收者验证签名的方式可将数字签名分为真数字签名和公证数字签名两类。<br>数字签名算法可分为普通数字签名算法、不可否认数字签名算法、Fail-Stop数字签名算法、盲数字签名算法和群数字签名算法等。</p>
+<p><strong>手写签名和数字签名的区别</strong>是：一是手写签名是不变的，而数字签名对不同的消息是不同的，即手写签名因人而异，数字签名因消息而异；二是手写签名是易被模拟的，无论哪种文字的手写签名，伪造者都容易模仿，而数字签名是在密钥控制下产生的，在没有密钥的情况下，模仿者几乎无法模仿出数字签名。</p>
+<p><strong>身份认证</strong>的目的是验证信息收发方是否持有合法的身份认证符。从认证机制上讲，身份认证技术可分为两类：一类是专门进行身份认证的直接身份认证技术；另一类是在消息签名和加密认证过程中，通过校验收发方是否持有合法的密钥进行的认证，称为间接身份认证技术。<br>身份认证的方式主要有通行字(口令)方式和持证(Token)方式。<br>身份认证协议大多数为询问-应答式协议。询问-应答式协议可分为两类：一类是基于私钥密码体制，另一类是基于公钥密码体制。</p>
+<p><strong>消息认证</strong>是指通过对消息或消息相关信息进行加密或签名变换进行的认证，其目的包括消息内容认证、消息的源和宿认证以及消息的序号和操作时间认证等。<br><strong>消息内容认证</strong>常用的方法是：消息发送者在消息中加入一个鉴别码，经加密后发送给接收者，接收者利用约定的算法对解密后的消息进行鉴别运算，若获得的鉴别码与原鉴别码相等则接收，否则拒绝接收。<br><strong>消息源和宿认证</strong>的常用方法有两种：一种是通信双方事先约定发送消息的数据加密密钥，接收者只需证实发送来的消息是否能用该密钥还原成明文就能够鉴别发送者；另一种是通信双方事先约定用于各自发送消息的通行字，发送消息时将通行字一并进行加密，接收者只需判别消息中解密的通行字是否与约定通行字相符就可以鉴别发送者。<br><strong>消息序号和操作时间的认证</strong>主要用于组织消息的重放攻击。常用方法有消息的流水作业、链接认证符随机数认证法和时间戳。</p>
+<p><strong>数字签名与消息认证的区别</strong>是，消息认证可以帮助接收方验证消息发送者的身份及消息是否被篡改。当存在利害冲突时，单纯采用消息认证技术就无法解决纠纷，这时就需要借助于数字签名技术来辅助进行更有效的消息认证。</p>
+<h3 id="PKI-公钥基础设施"><a href="#PKI-公钥基础设施" class="headerlink" title="PKI(公钥基础设施)"></a>PKI(公钥基础设施)</h3><p>从参与电子政务与电子商务的用户实体出发，应用系统常规的安全需求如下：认证需求、访问控制需求、保密需求、数据完整性需求和不可否认需求。</p>
+<p>PKI是一个用公钥密码算法原理和技术来提供安全服务的通用性基础平台，用户可利用PKI平台提供的安全服务进行安全通信。<br>PKI的特点是：节省费用、互操作性、开放性、一致的解决方案、可验证性、可选择性。<br>PKI认证技术的组成主要包括认证机构CA、证书库、密钥备份、证书作废系统和PKI应用接口系统等。<br>CA作为数字证书签发机构，是PKI的核心，是PKI应用中权威的、可信任的、公正的第三方机构。CA密钥的产生方式有两种：1. 用户自己生成密钥对，然后将公钥以安全的方式传送给CA；2. CA替用户生成密钥对，然后将其以安全的方式传送给用户。<br>证书及证书撤销信息的分发办法是发布。<br>交叉认证的方法有三类：</p>
+<ol>
+<li>一个给定的CA可承认另一个CA在其所控制的范围内被授权颁发的证书。</li>
+<li>允许不同的PKI域建立互操作路径。</li>
+<li>交换根CA的密钥，并用外部域的根CA的密钥填充每个终端实体的软、硬件。</li>
+</ol>
+<p>PKI客户端软件的主要功能是：</p>
+<ol>
+<li>询问证书和相关的撤销信息。</li>
+<li>在一定时刻为文档请求时间戳。</li>
+<li>作为安全通信的接收点。</li>
+<li>进行传输加密或数字签名。</li>
+<li>执行取消操作。</li>
+<li>证书路径处理。</li>
+</ol>
+<h3 id="常用公钥加密软件"><a href="#常用公钥加密软件" class="headerlink" title="常用公钥加密软件"></a>常用公钥加密软件</h3><p>PGP和GnuPG是两个常用的公钥加密软件。<br>PGP是一款基于RSA公钥加密体系的邮件加密软件，提出了公共钥匙或不对称文件加密和数字签名的方法。PGP不是一种完全的非对称加密体系，它是个混合加密算法，它由一个对称加密算法(IDEA)、一个非对称加密算法(RSA)、一个单向散列算法(MD5)及一个随机数产生器组成。</p>
+<p>GnuPG的技术特点有：完全兼容PGP，没用使用任何专利算法，遵循GNU公共许可证，支持多种加密算法，支持扩展模块，用户标识遵循标准结构，多语言支持，在线帮助系统，拥有众多的GUI界面支持。</p>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"># 计算机网络安全</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/03/07/zk-04751-notes4/">[04751计算机网络安全]笔记-第4章 防火墙技术</a>
+            
+            
+            <a class="next" rel="next" href="/2021/03/05/zk-04751-notes2/">[04751计算机网络安全]笔记-第2章 物理安全</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© 张小五 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

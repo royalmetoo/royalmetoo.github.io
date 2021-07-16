@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="张小五">
+
+
+
+
+
+<title>[03142互联网及其应用]笔记-第2章 互联网技术 | 大脑指挥手</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">大脑指挥手</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">大脑指挥手</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">[03142互联网及其应用]笔记-第2章 互联网技术</h1>
+            
+                <div class="post-meta">
+                    
+                        <a itemprop="author" rel="author" href="/">张小五</a>
+                    
+
+                    
+                        <span class="post-time">
+                         作于 <a href="#">2021年02月27日</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h3 id="TCP-IP协议"><a href="#TCP-IP协议" class="headerlink" title="TCP/IP协议"></a>TCP/IP协议</h3><p><strong>TCP/IP协议</strong>是互联网中采用的协议标准，是全世界采用的最广泛的工业标准。TCP/IP是一个协议系列，包含了100多个协议，用来将各种计算机和数据通信设备组成计算机网络，由于TCP(传输控制协议)和IP(网际协议)是其中最基本、最重要的两个协议，因此通常用TCP/IP协议来代表整个互联网协议系列。<br>**网际协议(IP)**是互联网最基本、最重要的协议。IP协议提供了3个基本功能：第一是基本数据单元的传送，规定了通过TCP/IP网的数据的格式；第二是IP协议软件执行路由功能，选择传递数据的路径；第三是确定主机和路由器如何处理分组的规则，以及产生差错报文后的处理方法。<br>IP协议定义的分组叫做IP数据报。IP数据报是有限长的，包括报头以及数据，报头信息包括源地址、目的地址、报文长度等，由接收端系统的主机和路由器处理报头信息。<br>**地址解析协议(ARP)和反向地址解析协议(RARP)**是一组用于发现MAC地址和IP地址间关系的协议。ARP协议采用广播消息的方法来获取网上IP地址对应的MAC地址；RARP协议采用广播消息的方法来决定与MAC地址相对应的IP地址。<br>**传输控制协议(TCP)**是为了解决互联网上分组交换通道中数据流量超载和传输拥塞的问题而设计的，使数据传输和通信更加可靠。TCP负责将数据从发送方正确地传递到接受方，是端到端的数据流传送。TCP是面向连接的，因此在传送数据之前，需要先建立连接。TCP有分组丢失检测、自动重传、处理延迟的重复数据报的功能，它还能进行流量控制和差错控制。<br>**用户数据协议(UDP)**的报头格式只有源端口、目的端口、长度和校验和。UDP采用无连接的方式向高层提供服务，与远方的UDP实体不建立端对端的连接，只将数据报送上网络或者从网络上接收数据，它不保证数据的可靠投递。采用UDP传输协议的高层应用有：Ping、TFTP、SNMP等。<br><img src="/img/03142/tcpip_with_osi.jpg" alt="tcpip_with_osi"></p>
+<p>TCP/IP协同工作中，IP提供了将数据分组从源计算机传送到目的计算机的方法，而TCP提供了解决在互联网传送过程中丢失数据报、重复传送数据报和数据报失序的方法。IP提供了灵活性，而TCP提供了可靠性。<br>TCP和UDP通过端口号与高层应用交换数据，在接收方，IP协议的标识号先于端口号进行检查，而TCP和UDP对端口号的使用彼此独立。1~255的端口号称为公用端口号。</p>
+<h3 id="IP地址"><a href="#IP地址" class="headerlink" title="IP地址"></a>IP地址</h3><p><strong>IP地址</strong>是一个32位的二进制无符号数，每8位为一段，转换为十进制后使用，最大为255.255.255.255。IP协议的地址通常划分成两部分或者三部分：第一部分指定网络的地址，第二部分指定子网的地址(可选)，第三部分指定主机的地址。这三部分的地址长度是可变的。<br>IP协议的寻址方式有5种：A类网络地址、B类网络地址、C类网络地址、D类网络地址、E类网络地址。<br><strong>A类网络地址</strong>，最高位为0(二进制位，以下均指二进制位)，主要是为大型网络设计，它提供的网络地址长7位，主机地址长24位，可表示为：nnn.hhh.hhh.hhh(网络地址：0~127)。其中127.0.0.1是特殊IP地址，表示主机本身。<br><strong>B类网络地址</strong>，最高两位为10，它提供的网络地址长14位，主机地址长16位，可表示为：nnn.nnn.hhh.hhh(网络地址：128.1~191.254)。<br><strong>C类网络地址</strong>，最高三位为110，它提供的网络地址长22位，主机地址长8位，可表示为：nnn.nnn.nnn.hhh(网络地址：192.0.1~223.255.254)。<br><strong>D类网络地址</strong>，最高四位为1110，在RFC1112中规定，将其留作IP多路复用组使用。<br><strong>E类网络地址</strong>，最高四位为1111，按IP协议规定，保留使用IP地址。<br><img src="/img/03142/ipv4.jpg" alt="ipv4"></p>
+<p>当主机标识部分的二进制编码全为0时，该网络号解释为本地地址，当主机标识部分的二进制编码全为1时，该网络号解释为本地网络内的广播地址，用于网络上的所有主机。<br><strong>子网掩码</strong>是用于指定有多少个二进制位用来表示子网的地址，也就是通过子网掩码可以识别主机是否在同一个(子)网段，其表示格式同IP地址。默认的子网掩码，A类地址为255.0.0.0，B类地址为255.255.0.0，C类地址为255.255.255.0。<br>划分子网的目的是区分不同的主机是否处在相同的网段，处于同一网段上的主机间可以直接通信，而且广播信息也被封闭在同一网段内。不同网段间的主机进行通信时，必须通过路由器才能访问。</p>
+<h3 id="域名"><a href="#域名" class="headerlink" title="域名"></a>域名</h3><p>**域名系统(DNS)**负责将主机名转换为IP地址。DNS实际上是一个服务器软件，运行在指定的计算机上，完成域名-IP地址的转换。它把网络中的主机按树形结构分成域(Domain)和子域(SubDomain)，子域名或主机名在上级域名结构中必须是唯一的。每一个子域都有域名服务器，它管理着本域的域名转换。<br><strong>计算机名</strong>是由局部名、组织名和组织类型名3部分组成的。</p>
+<h3 id="网络地址翻译技术-NAT"><a href="#网络地址翻译技术-NAT" class="headerlink" title="网络地址翻译技术(NAT)"></a>网络地址翻译技术(NAT)</h3><p><strong>NAT</strong>是一种解决IP地址资源缺乏，以及非法IP地址的技术，它将内部网络中的内部地址翻译成公网的IP地址。NAT的功能通常被集成到路由器、防火墙、ISDN路由器或者单独的NAT设备中。NAT设备维护一个状态表，用来把非法的IP地址映射到合法的IP地址去。<br>NAT有3种类型：静态NAT、NAT池、端口NAT。<br><strong>静态NAT</strong>就是把内部网络中的每个主机都永久映射成外部网络中的某个合法地址。<br><strong>NAT池</strong>是在外部网络中定义了一些列的合法地址，采用动态分配的方法映射到内部网络。<br><strong>PAT</strong>是把内部地址映射到外部网络的一个IP地址的不同端口上。</p>
+<h3 id="动态主机配置协议-DHCP"><a href="#动态主机配置协议-DHCP" class="headerlink" title="动态主机配置协议(DHCP)"></a>动态主机配置协议(DHCP)</h3><p><strong>DHCP</strong>是在TCP/IP网络上使客户机获得配置信息的协议，它基于BOOTP协议，并添加了自动分配可用网络地址等功能。DHCP向网络主机提供两部分配置信息：一部分是向网络主机传送专用的配置信息；另一部分是给主机分配网络地址。DHCP是基于客户/服务器模式的，它支持3种IP地址分配方法：自动分配、动态分配、手工分配。</p>
+<h3 id="IP组播技术"><a href="#IP组播技术" class="headerlink" title="IP组播技术"></a>IP组播技术</h3><p><strong>IP组播</strong>(也称多址广播或组播)技术，是一种允许一台或多台主机发送单一数据包到多台主机的TCP/IP技术。<br>IP组播通信必须依赖于IP组播地址，在IPv4中它是一个D类IP地址，范围从224.0.0.0~239.255.255.255，并被划分为局部链接组播地址、预留组播地址、管理权限组播地址。</p>
+<ul>
+<li>局部链接组播地址的范围是：224.0.0.0~224.0.0.255，是为路由协议和其他用途保留的地址，路由器不转发属于此范围的IP包。</li>
+<li>预留组播地址范围是：224.0.1.0~238.255.255.255，用于全球范围或网络协议。</li>
+<li>管理权限组播地址范围是：239.0.0.0~239.255.255.255，可供组织内部使用，不能用于互联网。</li>
+</ul>
+<p><strong>组播协议</strong>主要包括组管理协议(IGMP)和组播路由协议。组播路由协议可分为：密集模式协议、稀疏模式协议、链路状态协议。</p>
+<h3 id="IP安全性"><a href="#IP安全性" class="headerlink" title="IP安全性"></a>IP安全性</h3><p>**IPSec(Internet协议安全)**是由IETF定义的一套在网络层提供IP安全性的协议。IPSec提供了两种安全机制：认证和加密。</p>
+<ul>
+<li>认证机制使IP通信的数据接收方能够确认数据发送方的真实身份以及数据在传输过程中是否被修改。</li>
+<li>加密机制通过对数据进行加密来保证数据的机密性，以防数据在传输过程中被窃听。</li>
+</ul>
+<p>IPSec协议组包含AH协议、ESP协议和IKE协议。其中AH协议定义了认证的应用方法，提供数据源认证和完整性保证；ESP协议定义了加密和可选认证的应用方法，提供可靠性保证。IKE协议用于密钥交换。</p>
+<h3 id="IPv6"><a href="#IPv6" class="headerlink" title="IPv6"></a>IPv6</h3><p>IPv6是对IPv4的发展，IPv6具有更大的地址空间、全新的报文结构、全新的地址配置方式、更好的QoS支持、内置的安全性、全新的邻居发现协议。<br>IPv6地址相对IPv4长度扩展到128位，每16位划分为一段，每段被转换为一个4位的十六进制数，并用冒号分隔。<br>IPv6地址有3种表示格式：首选格式、压缩格式、内嵌格式。</p>
+<ul>
+<li>首选格式是8个4位十六进制数，以冒号分隔。例：2001:0250:0000:0001:0000:0000:0000:45ef。</li>
+<li>压缩格式是去掉不必要的0，且连续16比特0字符简写为“::”。例：2001:250:0:1::45ef。</li>
+<li>内嵌格式是指内嵌IPv4地址的IPv6地址，这是作为过渡机制中使用的一种特殊表示方法。IPv6地址的前面部分使用十六进制表示，而后面部分使用IPv4地址的十进制表示。例：0:0:0:0:0:0:192.168.1.201 或者 ::192.168.1.201；0:0:0:0:0:ffff:192.168.1.201 或者 ::ffff:192.168.1.201。</li>
+</ul>
+<p><strong>IPv6地址类型</strong>有单播、组播、任播3种类型，IPv6取消了IPv4的广播。<br>**邻居发现协议(NDP)**实现了在IPv4中的地址解析协议(ARP)、控制报文协议(ICMP)中的路由发现部分、重定向协议的所有功能，并具有邻居不可达检测机制。<br><strong>IPv6地址自动配置</strong>分为两种：无状态地址自动配置和有状态地址自动配置(如DHCPv6)。<br><strong>IPv4向IPv6过渡</strong>的主要方案有隧道技术、双栈技术、地址翻译技术。</p>
+<ul>
+<li>隧道技术可以把现有运行IPv4协议的互联网骨干网络将局部的IPv6网络连接起来；，</li>
+<li>双栈技术是在路由器和交换机的内部让IPv4和IPv6协议栈同时存在；</li>
+<li>地址翻译技术(NAT-PT)是附带协议转换器的网络地址转换器，通过修改协议报文头来转换网络地址，使他们能够互通。</li>
+</ul>
+<p><strong>IPv6邻居发现协议与IPv4地址解析协议的区别</strong><br>IPv6不再执行地址解析协议(ARP)或反向地址解析协议(RARP)，而以邻居发现协议(NDP)中的相应功能代替，其主要区别如下：</p>
+<ol>
+<li>IPv4中地址解析协议(ARP)是独立的协议，负责IP地址到链路层地址的转换，对不同的链路层协议要定义不同的ARP协议。IPv6中的邻居发现协议(NDP)包含了ARP的功能，且运行于因特网控制报文协议ICMPv6上，更具有一般性，包括更多的内容，而且适用于各种链路层协议。</li>
+<li>ARP协议以及ICMPv4路由器发现和ICMPv4重定向报文基于广播，而NDP协议的邻居发现报文基于高效的组播和单播。</li>
+<li>可达性检测的目的是确认相应IP地址代表的主机或路由器是否还能收发报文，IPv4没有统一的解决方案。NDP协议中定义可达性检测过程，保证IP报文不会发送给“黑洞”。</li>
+</ol>
+<h3 id="接入互联网"><a href="#接入互联网" class="headerlink" title="接入互联网"></a>接入互联网</h3><p>接入互联网的方式有窄带拨号方式、准宽带拨号方式、宽带拨号方式、3G无线上网。<br><strong>窄带拨号</strong>主要是利用电话线作为上网载体，灵活方便，但其速率一般为几十kbit/s到上报kbit/s。窄带拨号主要包括传统的PPP拨号和ISDN拨号两种方式，也有人将它们称为“模拟拨号”和“数字拨号”。<br><strong>准宽带方式</strong>是指上网的单向数据传输速率为几百kbit/s到几Mbit/s的上网方式，主要包括ADSL、CableModem、PLC等方式，其中ADSL利用电话线作为载体、CableModem利用有线电视电缆、PLC利用电力线。它们的共同特点是：利用现有线路资源；采用频率复用技术；不需要电话拨号；连接简单。<br><strong>宽带方式</strong>是指上网的单向数据传输速率在10Mbit/s以上的方式，主要包括有线局域网和无线局域网两种方式。有线局域网需要将光缆和双绞线铺设到要使用网络的用户办公室或家中；而无线局域网需要将无线信号覆盖用户所要上网的区域，无线局域网使用电磁波传送和接收数据。<br><strong>3G无线上网</strong>有三种标准：TD-SCDMA、WCDMA、CDMA2000。使用SIM卡及支持相应标准的设备连接上网。</p>
+<p><strong>调制解调器</strong>是一种进行数字信号与模拟信号转换的设备。计算机处理的是数字信号，而电话线传输的是模拟信号。调制解调器的一个重要指标是传输速率(bit/s)。把数字信号转换成模拟信号的叫调制器；把模拟信号转换成数字信号的叫解调器。<br><strong>ADSL</strong>也叫非对称数字用户环路，ADSL技术是运行在原有普通电话线上的一种新的高速宽带技术，它利用现有的一对电话铜线，为用户提供上、下行非对称的传输速率。</p>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E4%BA%92%E8%81%94%E7%BD%91%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8/"># 互联网及其应用</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/02/28/zk-03142-notes3/">[03142互联网及其应用]笔记-第3章 网络技术基础</a>
+            
+            
+            <a class="next" rel="next" href="/2021/02/26/zk-03142-notes1/">[03142互联网及其应用]笔记-第1章 互联网概述</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© 张小五 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
